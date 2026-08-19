@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "Circleback",
-    "slug": "Circleback",
+    "name": "LoopBack",
+    "slug": "LoopBack",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "circleback",
+    "scheme": "loopback",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
