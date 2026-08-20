@@ -11,7 +11,7 @@ export default function Index() {
       }}
       className="bg-background"
     >
-      <Button variant="default" size="default" className="bg-accent-foreground">
+      <Button variant="default" size="default">
         <ButtonText className="text-muted">Button</ButtonText>
       </Button>
     </View>
