@@ -1,7 +1,11 @@
-import { BlurView } from "expo-blur";
 import React from "react";
-import { Modal, Pressable, Text, View } from "react-native";
-import { KeyboardAwareScrollView } from "react-native-keyboard-controller";
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 interface CreateOccasionModalProps {
@@ -10,12 +14,14 @@ interface CreateOccasionModalProps {
   onSubmit: () => void;
 }
 
-const CreateOccasion = ({
+function CreateOccasion({
   visible,
   onClose,
   onSubmit,
-}: CreateOccasionModalProps) => {
-  const handleClose = () => {};
+}: CreateOccasionModalProps) {
+  const handleClose = () => {
+    onClose();
+  };
 
   return (
     <Modal
@@ -24,8 +30,9 @@ const CreateOccasion = ({
       animationType="slide"
       onRequestClose={handleClose}
     >
-      <SafeAreaView className="flex-1">
-        <BlurView intensity={30} tint="dark" style={{ flex: 1 }}>
+      <SafeAreaView style={{ flex: 1 }}>
+        {/* Blur replaced with a semi-transparent overlay (expo-blur version mismatch with Expo Go) */}
+        <View style={{ flex: 1, backgroundColor: "rgba(0,0,0,0.45)" }}>
           <Pressable
             className="modal-overlay"
             onPress={handleClose}
@@ -38,12 +45,12 @@ const CreateOccasion = ({
               <View className="modal-header">
                 <Text className="modal-title">New Subscription</Text>
                 <Pressable className="modal-close" onPress={handleClose}>
-                  <Text className="modal-close-text">x</Text>
+                  <Text className="modal-close-text">✕</Text>
                 </Pressable>
               </View>
 
-              <KeyboardAwareScrollView
-                bottomOffset={20}
+              {/* KeyboardAwareScrollView replaced with ScrollView (keyboard-controller needs a dev build) */}
+              <ScrollView
                 keyboardShouldPersistTaps="handled"
                 contentContainerStyle={{
                   padding: 20,
@@ -53,13 +60,13 @@ const CreateOccasion = ({
                 <View>
                   <Text>Hi There</Text>
                 </View>
-              </KeyboardAwareScrollView>
+              </ScrollView>
             </Pressable>
           </Pressable>
-        </BlurView>
+        </View>
       </SafeAreaView>
     </Modal>
   );
-};
+}
 
 export default CreateOccasion;

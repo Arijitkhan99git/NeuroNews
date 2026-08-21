@@ -119,7 +119,7 @@
   }
 
   .modal-container {
-    @apply mt-auto rounded-t-3xl bg-background dark:bg-darkBackground border-t-2 border-border dark:border-darkBorder;
+    @apply mt-auto rounded-t-3xl bg-background border-t-2 border-border;
   }
 
   .modal-header {
@@ -127,7 +127,7 @@
   }
 
   .modal-title {
-    @apply text-xl font-sans-bold text-primary dark:text-darkPrimary;
+    @apply text-xl text-primary;
   }
 
   .modal-close {
@@ -135,7 +135,7 @@
   }
 
   .modal-close-text {
-    @apply text-lg font-sans-bold text-primary;
+    @apply text-lg text-primary;
   }
 
   .modal-body {
