@@ -1,15 +1,19 @@
-import CreateOccasion from "@/components/ui/modals/createOccasion";
 import { colors, components } from "@/constants/theme";
 import { Tabs } from "expo-router";
-import { CalendarDays, House, Settings } from "lucide-react-native";
-import React, { useState } from "react";
+import {
+  Bookmark,
+  House,
+  Newspaper,
+  Settings,
+  TrendingUp,
+} from "lucide-react-native";
+import React from "react";
 
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const TabLayout = () => {
   const insets = useSafeAreaInsets();
   const tabBar = components.tabBar;
-  const [isCreateModalVisible, setIsCreateModalVisible] = useState(false);
 
   return (
     <>
@@ -21,7 +25,7 @@ const TabLayout = () => {
             position: "absolute",
             bottom: Math.max(insets.bottom, tabBar.horizontalInset),
             height: tabBar.height,
-            marginHorizontal: 40,
+            marginHorizontal: 30,
             borderRadius: tabBar.radius,
             backgroundColor: colors.primary,
             borderTopWidth: 0,
@@ -48,11 +52,31 @@ const TabLayout = () => {
         />
 
         <Tabs.Screen
-          name="calendar"
+          name="news"
           options={{
-            title: "Calendar",
+            title: "News",
             tabBarIcon: ({ color, size }) => (
-              <CalendarDays color={color} size={size} />
+              <Newspaper color={color} size={size} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="trends"
+          options={{
+            title: "Trends",
+            tabBarIcon: ({ color, size }) => (
+              <TrendingUp color={color} size={size} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="saved"
+          options={{
+            title: "Saved",
+            tabBarIcon: ({ color, size }) => (
+              <Bookmark color={color} size={size} />
             ),
           }}
         />
@@ -67,12 +91,6 @@ const TabLayout = () => {
           }}
         />
       </Tabs>
-
-      <CreateOccasion
-        visible={isCreateModalVisible}
-        onClose={() => setIsCreateModalVisible(false)}
-        onSubmit={() => setIsCreateModalVisible(false)}
-      />
     </>
   );
 };

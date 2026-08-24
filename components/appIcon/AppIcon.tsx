@@ -19,7 +19,7 @@ const AppIcon = () => {
 
   return (
     <Image
-      source={require("@/assets/icon/loopBack_icon.png")}
+      source={require("@/assets/icon/neuronews_icon.png")}
       style={{ width: ICON_SIZE, height: ICON_SIZE }}
       contentFit="contain"
       cachePolicy="memory-disk"

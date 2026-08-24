@@ -2,7 +2,7 @@ import { Box } from "@/components/ui/box";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Calendar = () => {
+const Trends = () => {
   return (
     <Box className="flex-1 bg-background">
       <SafeAreaView style={{ flex: 1, padding: 20 }}></SafeAreaView>
@@ -10,4 +10,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default Trends;

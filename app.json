@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "LoopBack",
-    "slug": "LoopBack",
+    "name": "Neuro News",
+    "slug": "neuro-news",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "loopback",
+    "scheme": "neuronews",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {

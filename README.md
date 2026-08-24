@@ -48,4 +48,140 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
 # NeuroNews
+
+# 🧠 Neuro News
+
+> Your daily intelligence on AI.
+
+Neuro News is a modern AI news and intelligence application that brings the latest **AI news, trends, investments, tips, and videos** into one clean and personalized experience.
+
+The app is designed with a minimal editorial interface, gradient-based cards, and full **Light / Dark / System theme support**.
+
+---
+
+## ✨ Features
+
+### 📰 AI News
+
+Stay updated with the latest developments in artificial intelligence.
+
+- Latest AI news
+- Featured stories
+- News categories
+- Impact indicators
+- Article details
+- Related stories
+- Search and filtering
+- Bookmark articles
+
+### 🔥 AI Trends
+
+Discover what's currently trending in the AI ecosystem.
+
+- Trending AI topics
+- Topic rankings
+- Trend growth indicators
+- AI topic exploration
+- Related news
+
+### 💰 AI Investments
+
+Track important AI investment activity.
+
+- Funding news
+- Startup investments
+- M&A activity
+- Funding rounds
+- Investment details
+
+### 💡 AI Tips
+
+Discover practical tips and ideas for using AI effectively.
+
+- AI tips of the day
+- Productivity tips
+- Prompting techniques
+- Practical AI use cases
+
+### 🎥 AI Videos
+
+Explore curated AI-related videos.
+
+- AI tutorials
+- Interviews
+- AI news videos
+- Research videos
+- AI tool demonstrations
+
+### 🔖 Saved Content
+
+Save interesting content for later.
+
+- Save news
+- Save trends
+- Save investment stories
+- Save videos
+- Personal reading list
+
+### 🔎 Search
+
+Search across AI content.
+
+- Search news
+- Search topics
+- Search companies
+- Recent searches
+- Suggested topics
+
+### 🔔 Notifications
+
+Stay informed about important AI updates.
+
+- High-impact news
+- Trending topics
+- Investment updates
+- Daily intelligence updates
+
+### 🎨 Theme Support
+
+Neuro News supports:
+
+- ☀️ Light Mode
+- 🌙 Dark Mode
+- ⚙️ System Mode
+
+The theme can be changed from the Profile settings.
+
+---
+
+## 🎨 Design
+
+Neuro News follows a **Minimal AI Editorial** design system.
+
+### Design Principles
+
+- Minimal
+- Premium
+- Modern
+- Editorial
+- Content-focused
+- Highly readable
+- Responsive
+- Accessible
+
+### Color Palette
+
+Primary colors:
+
+- Indigo
+- Violet
+- Blue
+- Cyan
+
+Primary gradient:
+
+```text
+Indigo → Violet → Blue
+```

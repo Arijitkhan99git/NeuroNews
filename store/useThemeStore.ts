@@ -22,7 +22,7 @@ export const useThemeStore = create<ThemeState>()(
       },
     }),
     {
-      name: "loopback-theme",
+      name: "neuronews-theme",
       storage: createJSONStorage(() => AsyncStorage),
     },
   ),

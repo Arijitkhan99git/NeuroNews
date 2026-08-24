@@ -1,7 +1,7 @@
 import AppIcon from "@/components/appIcon/AppIcon";
-import Appearance from "@/components/settings/preferences/appearance";
-import UserImage from "@/components/settings/userImage";
 import { Box } from "@/components/ui/box";
+import Appearance from "@/features/settings/preferences/appearance";
+import UserImage from "@/features/settings/userImage";
 import React from "react";
 import { Text } from "react-native";
 
