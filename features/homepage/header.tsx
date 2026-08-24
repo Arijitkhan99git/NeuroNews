@@ -1,5 +1,7 @@
 import AppIcon from "@/components/appIcon/AppIcon";
 import { Box } from "@/components/ui/box";
+import { GradientText } from "@/components/utils/GradientText";
+import { useThemeStore } from "@/store/useThemeStore";
 import { Bell } from "lucide-react-native";
 import React from "react";
 import { Text, View } from "react-native";
@@ -30,6 +32,12 @@ const DashboardHeader = () => {
     }
   };
 
+  const mode = useThemeStore((s) => s.mode);
+  const gradientColors =
+    mode === "dark"
+      ? (["#9DB2BF", "#ffffff"] as const)
+      : (["#6366f1", "#8b5cf6"] as const);
+
   return (
     <View>
       <View className="flex flex-row justify-between">
@@ -46,13 +54,16 @@ const DashboardHeader = () => {
       </View>
 
       <View className="gap-1 mt-10">
-        <Text className="text-secondary">{formattedDate}</Text>
+        <Text className="text-sky-500">{formattedDate}</Text>
         <Text className="text-gray-200 font-semibold text-5xl py-1">
           {getGreeting()}
         </Text>
-        <Text className="text-lg text-muted-foreground">
+        <GradientText
+          className="text-lg"
+          colors={gradientColors} // pick colors matching your dark theme tokens
+        >
           Your daily intelligence on AI.
-        </Text>
+        </GradientText>
       </View>
     </View>
   );

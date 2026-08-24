@@ -3,6 +3,8 @@ import { fetchQueryKey } from "@/api/query-key";
 import { fetchTrendingNews } from "@/api/services/trending-services";
 import { fetchWeeks } from "@/api/services/weeks-services";
 import { useQuery } from "@tanstack/react-query";
+import clsx from "clsx";
+import { Cpu } from "lucide-react-native";
 import { useColorScheme } from "nativewind";
 import React from "react";
 import { Text, View } from "react-native";
@@ -29,14 +31,24 @@ const AiDaily = () => {
     ...QUERY_CONFIG.default,
   });
 
-  console.log("latestPeriodId:", latestPeriodId);
-  console.log("trendingData:", trendingData);
-
   const trendingCount = trendingData?.trends.en.length;
 
   return (
-    <View className={isDark ? "bg-gray-700" : "bg-gray-200"}>
-      <Text className="text-primary pb-3">AI DAILY INTEL</Text>
+    <View
+      className={clsx(
+        isDark ? "bg-gray-800" : "bg-gray-200",
+        "p-4 mt-10 rounded-xl",
+      )}
+    >
+      <View className="flex flex-row items-center justify-between">
+        <View className="px-3 py-1 bg-[#004E5C] self-start rounded-md">
+          <Text className="text-primary text-lg text-center">
+            AI DAILY INTEL
+          </Text>
+        </View>
+        <Cpu color="#2563eb" />
+      </View>
+
       <View>
         <Text className="text-white">{trendingCount}</Text>
         <Text>Trending</Text>
