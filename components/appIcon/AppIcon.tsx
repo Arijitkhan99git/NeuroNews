@@ -2,7 +2,7 @@ import { Box } from "@/components/ui/box";
 import { Image } from "expo-image";
 import React, { useState } from "react";
 
-const ICON_SIZE = 60;
+const ICON_SIZE = 50;
 
 const AppIcon = () => {
   const [hasError, setHasError] = useState(false);
@@ -19,7 +19,7 @@ const AppIcon = () => {
 
   return (
     <Image
-      source={require("@/assets/icon/neuronews_icon.png")}
+      source={require("@/assets/icon/NeuroNewsLogo1.png")}
       style={{ width: ICON_SIZE, height: ICON_SIZE }}
       contentFit="contain"
       cachePolicy="memory-disk"
