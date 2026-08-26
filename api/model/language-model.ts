@@ -1,5 +1,5 @@
 export interface Language {
-  code: string; // API language key, e.g. "en", "de"
+  code: LanguageCode; // API language key, e.g. "en", "de"
   label: string; // English display name
   nativeLabel: string; // Name in its own language
 }

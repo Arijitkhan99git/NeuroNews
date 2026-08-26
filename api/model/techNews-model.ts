@@ -16,7 +16,7 @@ type ImpactLevel = "high" | "medium" | "low";
 
 type IconType = "Zap" | "Brain" | "Cpu" | "Server";
 
-interface NewsItem {
+export interface NewsItem {
   id: number;
   author: Author;
   content: string;

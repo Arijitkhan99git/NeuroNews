@@ -6,7 +6,6 @@ import { fetchTechNews } from "@/api/services/techNews-services";
 import { fetchTrendingNews } from "@/api/services/trending-services";
 import { Divider } from "@/components/ui/divider";
 import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
-import { useSyncLatestPeriod } from "@/hooks/useSyncLatestPeriod";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { useLatestPeriodStore } from "@/store/usePeriodIdStore";
 import { useQuery } from "@tanstack/react-query";
@@ -45,9 +44,9 @@ const AiDaily = () => {
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === "dark";
 
-  useSyncLatestPeriod();
-
   const latestPeriodId = useLatestPeriodStore((s) => s.latestPeriodId);
+
+  const isPeriodReady = !!latestPeriodId;
 
   const currentLanguage: LanguageCode =
     useLanguageStore((l) => l.languageCode) ?? "en";
@@ -88,7 +87,7 @@ const AiDaily = () => {
     <View
       className={clsx(
         isDark ? "bg-gray-800" : "bg-gray-200",
-        "px-4 py-6 mt-10 rounded-xl",
+        "px-4 py-6 rounded-xl",
       )}
     >
       <View className="flex flex-row items-center justify-between mb-5">
@@ -102,19 +101,19 @@ const AiDaily = () => {
         <StatItem
           count={techNewsCount ?? 0}
           label="News"
-          isLoading={techNewsloading}
+          isLoading={!isPeriodReady || techNewsloading}
         />
         <Divider orientation="vertical" className="bg-border" />
         <StatItem
           count={trendingCount ?? 0}
           label="Trending"
-          isLoading={trendingLoading}
+          isLoading={!isPeriodReady || trendingLoading}
         />
         <Divider orientation="vertical" className="bg-border" />
         <StatItem
           count={investmentTotalCount ?? 0}
           label="Signals"
-          isLoading={investmentLoading}
+          isLoading={!isPeriodReady || investmentLoading}
         />
       </View>
     </View>

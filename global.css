@@ -40,6 +40,7 @@
     --ring: 79 70 229;
     --accent: 165 65 0; /* #A54100  burnt orange */
     --accent-foreground: 255 255 255;
+    --heading: 55 65 81; /* text-gray-700 */
   }
 
   @media (prefers-color-scheme: dark) {
@@ -62,6 +63,7 @@
       --accent: 139 92 246; /* #8B5CF6  violet / tertiary */
       --accent-foreground: 255 255 255;
       --ring: 0 180 200;
+      --heading: 209 213 219; /* text-gray-300 */
     }
   }
 
@@ -126,6 +128,7 @@
   --color-ring: rgb(var(--ring));
   --color-accent: rgb(var(--accent));
   --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-heading: rgb(var(--heading));
 }
 
 @layer components {

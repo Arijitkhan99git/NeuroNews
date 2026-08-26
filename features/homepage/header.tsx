@@ -55,16 +55,18 @@ const DashboardHeader = () => {
       </View>
 
       <View className="gap-1 mt-10">
-        <Text className="text-gray-200">{formattedDate}</Text>
-        <Text className="text-gray-200 font-semibold text-5xl py-1">
-          {getGreeting()}
-        </Text>
         <GradientText
           className="text-lg"
           colors={gradientColors} // pick colors matching your dark theme tokens
         >
-          Your daily intelligence on AI.
+          {formattedDate}
         </GradientText>
+
+        <Text className="text-gray-200 font-semibold text-5xl py-1">
+          {getGreeting()}
+        </Text>
+
+        <Text className="text-gray-300"> Your daily intelligence on AI.</Text>
       </View>
     </View>
   );
