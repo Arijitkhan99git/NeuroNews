@@ -1,5 +1,6 @@
 import { NewsItem } from "@/api/model/techNews-model";
 import CustomBadge from "@/components/utils/Badge";
+import ImpactBadge from "@/components/utils/ImpactBadge";
 
 import { Dimensions, Pressable, Text, View } from "react-native";
 
@@ -23,6 +24,10 @@ export function ArticleCard({ item }: { item: NewsItem }) {
 
         <View className="flex-row items-center justify-between gap-2">
           <Text className="text-gray-300 text-sm">{item.source}</Text>
+
+          <View>
+            <ImpactBadge impact={item.impact} />
+          </View>
         </View>
       </View>
     </Pressable>
