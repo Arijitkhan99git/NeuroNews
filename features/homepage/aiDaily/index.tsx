@@ -1,7 +1,8 @@
 import { QUERY_CONFIG } from "@/api/config";
 import { fetchQueryKey } from "@/api/query-key";
 import { fetchTrendingNews } from "@/api/services/trending-services";
-import { fetchWeeks } from "@/api/services/weeks-services";
+import { useSyncLatestPeriod } from "@/hooks/useSyncLatestPeriod";
+import { useLatestPeriodStore } from "@/store/usePeriodIdStore";
 import { useQuery } from "@tanstack/react-query";
 import clsx from "clsx";
 import { Cpu } from "lucide-react-native";
@@ -13,15 +14,9 @@ const AiDaily = () => {
   const { colorScheme } = useColorScheme();
   const isDark = colorScheme === "dark";
 
-  // Step 1: fetch available weeks to get the most recent period with data
-  const { data: weeksData } = useQuery({
-    queryKey: ["weeks"],
-    queryFn: fetchWeeks,
-    ...QUERY_CONFIG.static, // weeks list rarely changes
-  });
+  useSyncLatestPeriod();
 
-  // Pick the first day of the most recent available week
-  const latestPeriodId = weeksData?.weeks[0]?.days[0]?.id ?? null;
+  const latestPeriodId = useLatestPeriodStore((s) => s.latestPeriodId);
 
   // Step 2: fetch trends for that period (only runs once we have a periodId)
   const { data: trendingData, isLoading } = useQuery({

@@ -45,7 +45,7 @@
   @media (prefers-color-scheme: dark) {
     :root {
       /* Dark theme — Primary: #00B4C8  Secondary: #6366F1  Tertiary: #8B5CF6  Neutral: #FAFAFA */
-      --primary: 0 180 200; /* #00B4C8  cyan / teal */
+      --primary: 14 165 233; /* #00B4C8  cyan / teal */
       --primary-foreground: 10 10 10;
       --card: 22 27 34; /* dark card surface */
       --secondary: 99 102 241; /* #6366F1  indigo-purple */

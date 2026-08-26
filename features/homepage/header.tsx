@@ -33,9 +33,10 @@ const DashboardHeader = () => {
   };
 
   const mode = useThemeStore((s) => s.mode);
+
   const gradientColors =
-    mode === "dark"
-      ? (["#9DB2BF", "#ffffff"] as const)
+    mode === "dark" || "system"
+      ? (["#A684FF", "#FFFFFF"] as const)
       : (["#6366f1", "#8b5cf6"] as const);
 
   return (
@@ -54,7 +55,7 @@ const DashboardHeader = () => {
       </View>
 
       <View className="gap-1 mt-10">
-        <Text className="text-sky-500">{formattedDate}</Text>
+        <Text className="text-gray-200">{formattedDate}</Text>
         <Text className="text-gray-200 font-semibold text-5xl py-1">
           {getGreeting()}
         </Text>

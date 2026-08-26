@@ -9,3 +9,9 @@ export async function fetchTrendingNews(
 
   return response.data;
 }
+
+export async function fetchTechNews(params: string): Promise<TrendsResponse> {
+  const response = await axios.get(API_ENDPOINTS.tech(params));
+
+  return response.data;
+}
