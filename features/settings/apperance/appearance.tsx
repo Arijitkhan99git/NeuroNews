@@ -1,16 +1,16 @@
 import { Box } from "@/components/ui/box";
 import { ChevronDownIcon } from "@/components/ui/icon";
 import {
-    Select,
-    SelectBackdrop,
-    SelectContent,
-    SelectDragIndicator,
-    SelectDragIndicatorWrapper,
-    SelectIcon,
-    SelectInput,
-    SelectItem,
-    SelectPortal,
-    SelectTrigger,
+  Select,
+  SelectBackdrop,
+  SelectContent,
+  SelectDragIndicator,
+  SelectDragIndicatorWrapper,
+  SelectIcon,
+  SelectInput,
+  SelectItem,
+  SelectPortal,
+  SelectTrigger,
 } from "@/components/ui/select";
 import { useThemeStore } from "@/store/useThemeStore";
 import { Palette } from "lucide-react-native";
@@ -43,7 +43,7 @@ const Appearance = () => {
 
   return (
     <Box className="flex gap-2">
-      <Text className="text-muted-foreground">Preferences</Text>
+      <Text className="text-muted-foreground">Appearance</Text>
       <Box className="bg-secondary w-full p-4 flex flex-row justify-between rounded-lg items-center">
         <Box className="flex flex-row items-center gap-2">
           <IconWrap bg="#7C8BE0" />

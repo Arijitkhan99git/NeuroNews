@@ -1,6 +1,7 @@
 import AppIcon from "@/components/appIcon/AppIcon";
 import { Box } from "@/components/ui/box";
-import Appearance from "@/features/settings/preferences/appearance";
+import Appearance from "@/features/settings/apperance/appearance";
+import { PreferencesSection } from "@/features/settings/preferences/PreferencesSection";
 import UserImage from "@/features/settings/userImage";
 import React from "react";
 import { Text } from "react-native";
@@ -19,6 +20,7 @@ const Settings = () => {
 
         <UserImage />
         <Appearance />
+        <PreferencesSection />
       </SafeAreaView>
     </Box>
   );

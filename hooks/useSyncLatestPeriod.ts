@@ -17,8 +17,11 @@ export function useSyncLatestPeriod() {
   // Pick the first day of the most recent available week
   useEffect(() => {
     const days = weeksData?.weeks[0]?.days ?? [];
-    const currentDay = days.find((d) => d.current);
-    const latestPeriodId = currentDay?.id ?? days[0]?.id ?? null;
+
+    const weekLength = weeksData?.weeks[0].days.length ?? 0;
+
+    const latestPeriodId = weekLength ? days[weekLength - 1].id : null;
+
     setLatestPeriodId(latestPeriodId);
   }, [weeksData, setLatestPeriodId]);
 }
