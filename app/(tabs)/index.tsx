@@ -3,6 +3,7 @@ import { VStack } from "@/components/ui/vstack";
 import AiDaily from "@/features/homepage/aiDaily";
 import DashboardHeader from "@/features/homepage/header";
 import InvestmentHomePage from "@/features/homepage/investment";
+import AiTipsHomePage from "@/features/homepage/tips";
 import TopStories from "@/features/homepage/topStories/TopStories";
 import TrendingHomePage from "@/features/homepage/trending";
 import { useSyncLatestPeriod } from "@/hooks/useSyncLatestPeriod";
@@ -28,6 +29,7 @@ export default function Index() {
               <TopStories />
               <TrendingHomePage />
               <InvestmentHomePage />
+              <AiTipsHomePage />
             </VStack>
           </VStack>
         </ScrollView>

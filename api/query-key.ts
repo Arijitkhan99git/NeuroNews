@@ -6,4 +6,6 @@ export const fetchQueryKey = createExtendedQueryKeys("home", {
   tech: (periodId: string) => ["home", "tech", periodId] as const,
 
   investment: (periodId: string) => ["home", "investment", periodId] as const,
+
+  tip: (periodId: string) => ["home", "tip", periodId] as const,
 });

@@ -1,8 +1,7 @@
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
-import { useInvestmentNews } from "@/hooks/useInvestmentNews";
-import { useLanguageStore } from "@/store/useLanguageStore";
 import React, { useMemo } from "react";
+import { FundingComponentProps } from "..";
 import FundingCard from "./FundingCard";
 
 const parseAmount = (amount: string): number => {
@@ -58,11 +57,13 @@ const getDetail = (
   return "Funding";
 };
 
-const TopFunding = () => {
-  const { investmentData, isLoading, isError, error } = useInvestmentNews();
-
-  const languageCode = useLanguageStore((state) => state.languageCode);
-
+const TopFunding = ({
+  investmentData,
+  isLoading,
+  isError,
+  error,
+  languageCode,
+}: FundingComponentProps) => {
   const topFunding = useMemo(() => {
     const primaryMarket = investmentData?.primaryMarket?.[languageCode] ?? [];
 
