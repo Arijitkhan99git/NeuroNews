@@ -49,24 +49,23 @@ const DashboardHeader = () => {
           </Text>
         </Box>
 
-        <Box className="p-3 rounded-xl bg-gray-700 flex justify-center items-center self-center">
+        <Box className="p-2 border border-gray-500 rounded-xl bg-gray-700 flex justify-center items-center self-center">
           <Bell color="#FFFFFF" strokeWidth={2} size={23} />
         </Box>
       </View>
 
       <View className="gap-1 mt-10">
         <GradientText
-          className="text-lg"
           colors={gradientColors} // pick colors matching your dark theme tokens
         >
           {formattedDate}
         </GradientText>
 
-        <Text className="text-gray-200 font-semibold text-5xl py-1">
+        <Text className="text-gray-200 font-semibold text-4xl">
           {getGreeting()}
         </Text>
 
-        <Text className="text-gray-300"> Your daily intelligence on AI.</Text>
+        <Text className="text-gray-400"> Your daily intelligence on AI.</Text>
       </View>
     </View>
   );

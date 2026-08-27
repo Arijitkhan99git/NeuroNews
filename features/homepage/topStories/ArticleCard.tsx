@@ -10,20 +10,20 @@ export function ArticleCard({ item }: { item: NewsItem }) {
   return (
     <Pressable
       style={{ width: CARD_WIDTH }}
-      className="mr-5 rounded-2xl bg-gray-800 border border-gray-700 overflow-hidden p-4"
+      className="mr-5 rounded-2xl bg-card border border-border overflow-hidden p-4"
     >
-      <View className="gap-2">
+      <View className="gap-3">
         <CustomBadge text={item.category} />
 
         <Text
           numberOfLines={2}
-          className="text-gray-200 text-lg font-semibold mb-2"
+          className="text-gray-300 text-lg font-medium mb-2"
         >
           {item.content}
         </Text>
 
         <View className="flex-row items-center justify-between gap-2">
-          <Text className="text-gray-300 text-sm">{item.source}</Text>
+          <Text className="text-gray-400 text-sm">{item.source}</Text>
 
           <View>
             <ImpactBadge impact={item.impact} />

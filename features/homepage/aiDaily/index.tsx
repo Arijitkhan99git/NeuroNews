@@ -5,7 +5,7 @@ import { fetchInvestmentNews } from "@/api/services/investment-services";
 import { fetchTechNews } from "@/api/services/techNews-services";
 import { fetchTrendingNews } from "@/api/services/trending-services";
 import { Divider } from "@/components/ui/divider";
-import { Skeleton, SkeletonText } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { useLatestPeriodStore } from "@/store/usePeriodIdStore";
 import { useQuery } from "@tanstack/react-query";
@@ -24,18 +24,19 @@ interface StatItemProps {
 function StatItem({ count, label, isLoading }: StatItemProps) {
   return (
     <View className="flex-1 items-center justify-center py-4">
-      <Skeleton
-        variant="rounded"
-        className="h-7 w-10 mb-1"
-        isLoaded={!isLoading}
-      >
-        <Text className="text-foreground text-2xl font-bold">{count}</Text>
-      </Skeleton>
-      <SkeletonText _lines={1} className="h-3 w-14" isLoaded={!isLoading}>
-        <Text className="text-muted-foreground text-xs tracking-wide mt-1">
-          {label}
-        </Text>
-      </SkeletonText>
+      {/* Count */}
+      {isLoading ? (
+        <Skeleton variant="rounded" className="h-7 w-12 mb-2 bg-gray-700" />
+      ) : (
+        <Text className="text-foreground text-2xl font-bold mb-1">{count}</Text>
+      )}
+
+      {/* Label */}
+      {isLoading ? (
+        <Skeleton variant="rounded" className="h-3 w-14 bg-gray-700" />
+      ) : (
+        <Text className="text-[#817EA1] text-xs tracking-wide">{label}</Text>
+      )}
     </View>
   );
 }
@@ -86,15 +87,17 @@ const AiDaily = () => {
   return (
     <View
       className={clsx(
-        isDark ? "bg-gray-800" : "bg-gray-200",
+        isDark ? "bg-[#100F19]" : "bg-gray-200",
         "px-4 py-6 rounded-xl",
       )}
     >
       <View className="flex flex-row items-center justify-between mb-5">
-        <View className="px-3 py-1 bg-[#004E5C] self-start rounded-md">
-          <Text className="text-primary text-center">AI DAILY INTEL</Text>
+        <View className="px-3 py-1 bg-badgebackground self-start rounded-md">
+          <Text className="text-badgeText text-center text-sm py-0.5">
+            AI DAILY INTEL
+          </Text>
         </View>
-        <Cpu color="#2563eb" />
+        <Cpu color="#A684FF" />
       </View>
 
       <View className="flex-row items-stretch bg-card rounded-2xl border border-border overflow-hidden">

@@ -7,9 +7,9 @@ interface BadgeProps {
 
 const CustomBadge = ({ text }: BadgeProps) => {
   return (
-    <View className="self-start rounded-full bg-[#004E5C] flex items-center justify-center px-2 py-1">
+    <View className="self-start rounded-full bg-badgebackground flex items-center justify-center px-2 py-1">
       <Text
-        className="text-primary"
+        className="text-badgeText"
         style={{
           fontSize: 12,
         }}

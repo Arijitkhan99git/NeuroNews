@@ -5,7 +5,7 @@ type TrendMomentum = "new" | "rising" | "falling" | "steady";
 type LocaleCode = "de" | "en" | "zh" | "fr" | "es" | "pt" | "ja" | "ko";
 
 /** A single trending topic entry */
-interface TrendItem {
+export interface TrendItem {
   category: string;
   title: string;
   posts: number | null;
