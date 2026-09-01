@@ -30,7 +30,7 @@ const ValuationCard = ({ company, valuation, detail }: ValuationCardProps) => {
           </Text>
         </VStack>
 
-        <Text className="ml-3 text-xl font-semibold text-cyan-500">
+        <Text className="ml-3 text-lg font-semibold text-sky-500">
           {valuation}
         </Text>
       </HStack>

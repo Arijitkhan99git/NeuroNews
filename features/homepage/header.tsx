@@ -35,16 +35,16 @@ const DashboardHeader = () => {
   const mode = useThemeStore((s) => s.mode);
 
   const gradientColors =
-    mode === "dark" || "system"
+    mode === "dark" || mode === "system"
       ? (["#A684FF", "#FFFFFF"] as const)
-      : (["#6366f1", "#8b5cf6"] as const);
+      : (["#8661d2", "#d2b2f2"] as const);
 
   return (
     <View>
       <View className="flex flex-row justify-between">
         <Box className="flex flex-row gap-2 items-center">
           <AppIcon />
-          <Text className="text-primary text-2xl font-semibold">
+          <Text className="text-[#5d3de8] text-2xl font-semibold">
             NEURO NEWS
           </Text>
         </Box>

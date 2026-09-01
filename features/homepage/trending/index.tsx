@@ -28,7 +28,7 @@ const TrendingHomePage = () => {
         </VStack>
 
         <Pressable className="flex-row items-center gap-1">
-          <Text className="text-sm text-muted">View All</Text>
+          <Text className="text-sm text-secondary">View All</Text>
 
           <ArrowRight size={18} color="#b9a0f8cc" />
         </Pressable>

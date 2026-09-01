@@ -3,6 +3,7 @@ import { VStack } from "@/components/ui/vstack";
 import { SectionHeading } from "@/components/utils/SectionHeading";
 import { useTechNews } from "@/hooks/useTechNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
+import { router } from "expo-router";
 import { ArrowRight, View } from "lucide-react-native";
 import React from "react";
 import { Dimensions, FlatList, Pressable, Text } from "react-native";
@@ -22,7 +23,10 @@ const TopStories = () => {
       <HStack className="justify-between items-center mb-5">
         <SectionHeading>Top Stories</SectionHeading>
 
-        <Pressable className="flex flex-row gap-1">
+        <Pressable
+          className="flex flex-row gap-1"
+          onPress={() => router.navigate("/news")}
+        >
           <Text className=" text-muted text-sm">View All</Text>
           <ArrowRight color="#b9a0f8cc" size={20} />
         </Pressable>

@@ -34,8 +34,8 @@ const MarketMoveItem = ({
 
           <VStack className="flex-1">
             <Text
-              className="mt-1 text-xs text-muted-foreground"
-              numberOfLines={2}
+              className="mt-1 text-sm text-muted-foreground"
+              numberOfLines={3}
             >
               {description}
             </Text>

@@ -1,4 +1,5 @@
-import { colors, components } from "@/constants/theme";
+import { components } from "@/constants/theme";
+import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
 import {
   Bookmark,
@@ -21,16 +22,30 @@ const TabLayout = () => {
         screenOptions={{
           headerShown: false,
           tabBarShowLabel: false,
+          tabBarActiveTintColor: "#FFFFFF",
+          tabBarInactiveTintColor: "rgba(255, 255, 255, 0.5)",
           tabBarStyle: {
             position: "absolute",
             bottom: Math.max(insets.bottom, tabBar.horizontalInset),
             height: tabBar.height,
             marginHorizontal: 30,
             borderRadius: tabBar.radius,
-            backgroundColor: colors.primary,
+            backgroundColor: "transparent",
             borderTopWidth: 0,
             elevation: 0,
           },
+          tabBarBackground: () => (
+            <LinearGradient
+              colors={["#4d45de", "#805bd7"]} // primary → secondary, or whatever you want
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={{
+                flex: 1,
+                borderRadius: tabBar.radius, // match tabBarStyle so corners aren't square
+                overflow: "hidden",
+              }}
+            />
+          ),
           tabBarItemStyle: {
             paddingVertical: tabBar.height / 2 - tabBar.iconFrame / 1.6,
           },

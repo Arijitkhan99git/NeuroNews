@@ -60,7 +60,7 @@ const AiTipsHomePage = () => {
       ))}
 
       {/* View all */}
-      <Text className="mt-1 text-center text-sm font-semibold text-cyan-400">
+      <Text className="mt-1 text-center text-sm font-semibold text-secondary">
         View all tips →
       </Text>
     </VStack>
