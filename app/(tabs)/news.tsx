@@ -9,6 +9,7 @@ import { useTechNewsFilterStore } from "@/features/filterModal/filterStore/useTe
 
 import NewsFilterModal from "@/features/filterModal/NewsFilterModal";
 import NewsCard from "@/features/news/NewsCard";
+import NoResultsFound from "@/features/noResultFound/NoResultFound";
 import { useTechNews } from "@/hooks/useTechNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { Menu } from "lucide-react-native";
@@ -126,6 +127,9 @@ const News = () => {
             />
           }
           renderItem={({ item }) => <NewsCard item={item} />}
+          ListEmptyComponent={
+            <NoResultsFound description="Try to serach or filter something else." />
+          }
           contentContainerStyle={{
             paddingBottom: 120,
             gap: 16,

@@ -27,6 +27,8 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
   const storedSelectedDifficulties = useTechNewsFilterStore(
     (s) => s.selectedDifficulties,
   );
+  const clearCategories = useTechNewsFilterStore((s) => s.clearCategories);
+
   const setSelectedDifficulties = useTechNewsFilterStore(
     (s) => s.setSelectedDifficulties,
   );
@@ -68,8 +70,12 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
     );
   };
 
+  const totalSelectedCount =
+    (draftCategories.length > 0 ? draftCategories.length : 0) +
+    (draftDifficulties.length > 0 ? draftDifficulties.length : 0);
+
   const handleClearAll = () => {
-    setDraftCategories([]);
+    clearCategories();
     clearDifficulties();
   };
 
@@ -202,9 +208,7 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
                 <Pressable className="filter-apply-btn" onPress={handleApply}>
                   <Text className="filter-apply-text">
                     Apply
-                    {draftCategories.length > 0
-                      ? ` (${draftCategories.length})`
-                      : ""}
+                    {totalSelectedCount > 0 ? ` (${totalSelectedCount})` : ""}
                   </Text>
                 </Pressable>
               </View>

@@ -150,6 +150,9 @@
 }
 
 @layer components {
+  .center {
+    @apply flex items-center justify-center;
+  }
   .title {
     @apply text-xl font-semibold text-heading;
   }
