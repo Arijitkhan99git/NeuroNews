@@ -3,6 +3,7 @@ import { VStack } from "@/components/ui/vstack";
 import { SectionHeading } from "@/components/utils/SectionHeading";
 import { useTrendingNews } from "@/hooks/useTrendingNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
+import { router } from "expo-router";
 import { ArrowRight } from "lucide-react-native";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
@@ -27,7 +28,10 @@ const TrendingHomePage = () => {
           </Text>
         </VStack>
 
-        <Pressable className="flex-row items-center gap-1">
+        <Pressable
+          className="flex-row items-center gap-1"
+          onPress={() => router.push("/(tabs)/trends")}
+        >
           <Text className="text-sm text-secondary">View All</Text>
 
           <ArrowRight size={18} color="#b9a0f8cc" />

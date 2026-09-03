@@ -1,16 +1,20 @@
-import { TrendItem } from "@/api/model/trending-model";
+﻿import { TrendItem } from "@/api/model/trending-model";
 import { Sparkles } from "lucide-react-native";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Text, View } from "react-native";
 
-interface TrendingCardProps {
+interface TrendingCardListProps {
   item: TrendItem;
   index: number;
 }
 
-const TrendingCard = ({ item, index }: TrendingCardProps) => {
+/**
+ * Non-clickable version of TrendingCard for use in the Trends tab.
+ * Unlike the homepage TrendingCard (which uses Pressable), this is a plain View.
+ */
+const TrendingCardList = ({ item, index }: TrendingCardListProps) => {
   return (
-    <Pressable className="flex-row py-4 border-b border-border">
+    <View className="flex-row py-5 border-b border-border">
       {/* Rank */}
       <View className="ml-1 mr-3">
         <Text className="text-sm font-bold text-gray-400">
@@ -29,8 +33,7 @@ const TrendingCard = ({ item, index }: TrendingCardProps) => {
 
         {/* Title */}
         <Text
-          numberOfLines={2}
-          className="text-base font-semibold text-heading leading-5"
+          className="text-base font-semibold text-heading leading-5 py-1"
         >
           {item.title}
         </Text>
@@ -39,7 +42,6 @@ const TrendingCard = ({ item, index }: TrendingCardProps) => {
         <View className="flex-row items-center mt-2">
           <View className="flex-row items-center">
             <Sparkles size={11} color="#10B981" />
-
             <Text className="ml-1 text-[10px] font-semibold text-emerald-400">
               {item.momentum.toUpperCase()}
             </Text>
@@ -52,13 +54,8 @@ const TrendingCard = ({ item, index }: TrendingCardProps) => {
           </Text>
         </View>
       </View>
-
-      {/* Arrow */}
-      {/* <View className="justify-center ml-2">
-        <ArrowUpRight size={18} color="#6B7280" />
-      </View> */}
-    </Pressable>
+    </View>
   );
 };
 
-export default TrendingCard;
+export default TrendingCardList;
