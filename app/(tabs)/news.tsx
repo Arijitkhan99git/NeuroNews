@@ -2,17 +2,16 @@ import { Box } from "@/components/ui/box";
 import { HStack } from "@/components/ui/hstack";
 import { SearchIcon } from "@/components/ui/icon";
 import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
-
 import { VStack } from "@/components/ui/vstack";
 import { SectionHeading } from "@/components/utils/SectionHeading";
 import { useTechNewsFilterStore } from "@/features/filterModal/filterStore/useTechNewsFilterStore";
-
 import NewsFilterModal from "@/features/filterModal/NewsFilterModal";
 import NewsCard from "@/features/news/NewsCard";
+import NewsCardSkeleton from "@/features/news/NewsCardSkeleton";
 import NoResultsFound from "@/features/noResultFound/NoResultFound";
 import { useTechNews } from "@/hooks/useTechNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
-import { Menu } from "lucide-react-native";
+import { AlertTriangle, Menu, X } from "lucide-react-native";
 import React, { useEffect, useMemo, useState } from "react";
 import { FlatList, Pressable, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -45,7 +44,7 @@ const NewsHeader = ({
       </Box>
     </HStack>
 
-    <Box className="mt-6">
+    <Box className="mt-6 mb-6">
       <Input
         isDisabled={false}
         isInvalid={false}
@@ -63,6 +62,13 @@ const NewsHeader = ({
           onChangeText={onChangeQuery}
           className="text-base"
         />
+        {query.length > 0 && (
+          <InputSlot>
+            <Pressable onPress={() => onChangeQuery("")} hitSlop={8}>
+              <InputIcon as={X} className="w-5 h-5 text-muted-foreground" />
+            </Pressable>
+          </InputSlot>
+        )}
       </Input>
     </Box>
   </VStack>
@@ -72,13 +78,13 @@ const News = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const { techNewsData, isLoading, isError, error } = useTechNews();
+  const { techNewsData, isLoading, isError, error, refetch, isRefetching } =
+    useTechNews();
 
   const { setTechNews } = useTechNewsFilterStore();
   const selectedCategories = useTechNewsFilterStore(
     (s) => s.selectedCategories,
   );
-
   const selectedDifficulties = useTechNewsFilterStore(
     (s) => s.selectedDifficulties,
   );
@@ -113,23 +119,63 @@ const News = () => {
     return matchesSearch && matchesCategory && matchDifficulties;
   });
 
+  const header = (
+    <NewsHeader
+      query={searchQuery}
+      onChangeQuery={setSearchQuery}
+      setModalVisible={setIsModalVisible}
+    />
+  );
+
+  // Loading state — show header + skeleton cards, keeps layout stable while fetching
+  if (isLoading) {
+    return (
+      <Box className="flex-1 bg-background">
+        <SafeAreaView style={{ flex: 1, padding: 20 }}>
+          <FlatList
+            data={[1, 2, 3, 4]}
+            keyExtractor={(item) => item.toString()}
+            ListHeaderComponent={header}
+            renderItem={() => <NewsCardSkeleton />}
+            contentContainerStyle={{ paddingBottom: 120, gap: 16 }}
+            showsVerticalScrollIndicator={false}
+          />
+        </SafeAreaView>
+      </Box>
+    );
+  }
+
+  // Error state — distinct from "no results after filtering"
+  if (isError) {
+    return (
+      <Box className="flex-1 bg-background">
+        <SafeAreaView style={{ flex: 1, padding: 20 }}>
+          {header}
+          <NoResultsFound
+            icon={AlertTriangle}
+            title="Couldn't load news"
+            description={
+              error?.message ?? "Something went wrong. Pull down to retry."
+            }
+          />
+        </SafeAreaView>
+      </Box>
+    );
+  }
+
   return (
     <Box className="flex-1 bg-background">
       <SafeAreaView style={{ flex: 1, padding: 20 }}>
         <FlatList
           data={filterNewsData}
           keyExtractor={(item) => item.id.toString()}
-          ListHeaderComponent={
-            <NewsHeader
-              query={searchQuery}
-              onChangeQuery={setSearchQuery}
-              setModalVisible={setIsModalVisible}
-            />
-          }
+          ListHeaderComponent={header}
           renderItem={({ item }) => <NewsCard item={item} />}
           ListEmptyComponent={
-            <NoResultsFound description="Try to serach or filter something else." />
+            <NoResultsFound description="Try to search or filter something else." />
           }
+          onRefresh={refetch}
+          refreshing={isRefetching}
           contentContainerStyle={{
             paddingBottom: 120,
             gap: 16,

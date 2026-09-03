@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 export function useTechNews() {
   const latestPeriodId = useLatestPeriodStore((s) => s.latestPeriodId);
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error, refetch, isRefetching } = useQuery({
     queryKey: fetchQueryKey.tech(latestPeriodId ?? ""),
     queryFn: () => fetchTechNews(latestPeriodId!),
     enabled: !!latestPeriodId,
@@ -20,5 +20,7 @@ export function useTechNews() {
     isLoading: !latestPeriodId || isLoading,
     isError,
     error,
+    refetch,
+    isRefetching,
   };
 }

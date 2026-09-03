@@ -42,7 +42,7 @@ const TopStories = () => {
         {!isAtEnd && (
           <Pressable
             className="flex flex-row gap-1"
-            onPress={() => router.navigate("/news")}
+            onPress={() => router.push("/news")}
           >
             <Text className="text-muted text-sm">View All</Text>
             <ArrowRight color="#b9a0f8cc" size={20} />

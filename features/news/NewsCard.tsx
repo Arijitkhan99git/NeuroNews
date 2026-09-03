@@ -1,26 +1,21 @@
 import { NewsItem } from "@/api/model/techNews-model";
 import CustomBadge from "@/components/utils/Badge";
 import ImpactBadge from "@/components/utils/ImpactBadge";
-import { ArrowRight } from "lucide-react-native";
+import { router } from "expo-router";
 
-import { Linking, Pressable, Text, View } from "react-native";
+import { Pressable, Text, View } from "react-native";
 
 const NewsCard = ({ item }: { item: NewsItem }) => {
-  const handlePress = async () => {
-    if (!item.sourceUrl) return;
-
-    const supported = await Linking.canOpenURL(item.sourceUrl);
-
-    if (supported) {
-      await Linking.openURL(item.sourceUrl);
-    } else {
-      console.warn(`Cannot open URL: ${item.sourceUrl}`);
-    }
-  };
+  function handleNewsRedirect() {
+    router.push({
+      pathname: "/news/[id]",
+      params: { id: item.id },
+    });
+  }
 
   return (
     <Pressable
-      onPress={handlePress}
+      onPress={handleNewsRedirect}
       className="w-full rounded-2xl bg-card border border-border overflow-hidden p-4"
     >
       <View className="gap-3">
@@ -36,11 +31,6 @@ const NewsCard = ({ item }: { item: NewsItem }) => {
           <View>
             <ImpactBadge impact={item.impact} />
           </View>
-        </View>
-
-        <View className="flex-row justify-end items-center gap-1 mt-2">
-          <Text className="text-muted text-xs">Read more</Text>
-          <ArrowRight color="#b9a0f8cc" size={14} />
         </View>
       </View>
     </Pressable>
