@@ -11,9 +11,10 @@ import NewsCardSkeleton from "@/features/news/NewsCardSkeleton";
 import NoResultsFound from "@/features/noResultFound/NoResultFound";
 import { useTechNews } from "@/hooks/useTechNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
+import { router } from "expo-router";
 import { AlertTriangle, Menu, X } from "lucide-react-native";
 import React, { useEffect, useMemo, useState } from "react";
-import { FlatList, Pressable, Text } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const NewsHeader = ({
@@ -71,6 +72,20 @@ const NewsHeader = ({
         )}
       </Input>
     </Box>
+
+    <HStack className="flex-row gap-3 items-center mb-5">
+      <View className="bg-muted border border-border rounded-2xl px-4 py-2" style={styles.capsuleShadow}>
+        <Text className="text-sm font-bold text-foreground">Tech News</Text>
+      </View>
+      <View className="bg-card border border-muted rounded-2xl px-4 py-2" >
+        <Text className="text-sm font-bold text-foreground">Market Moves</Text>
+      </View>
+      <Pressable onPress={() => router.push("/tips")}>
+        <View className="bg-card border border-muted rounded-2xl px-4 py-2">
+          <Text className="text-sm font-bold text-foreground">Tips</Text>
+        </View>
+      </Pressable>
+    </HStack>
   </VStack>
 );
 
@@ -197,3 +212,13 @@ const News = () => {
 };
 
 export default News;
+
+const styles = StyleSheet.create({
+  capsuleShadow: {
+    shadowColor: "#7C3AED",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.6,
+    shadowRadius: 10,
+    elevation: 10,
+  },
+});

@@ -1,4 +1,4 @@
-import { Slot } from "expo-router";
+import { Stack } from "expo-router";
 
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
@@ -49,7 +49,15 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <SafeAreaProvider>
         <GluestackUIProvider mode={mode}>
-          <Slot />
+          <Stack
+            screenOptions={{
+              headerShown: false,
+
+            }}>
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="tips" />
+            <Stack.Screen name="news/[id]" />
+          </Stack>
         </GluestackUIProvider>
       </SafeAreaProvider>
     </QueryClientProvider>

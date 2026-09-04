@@ -2,6 +2,7 @@ import { Box } from "@/components/ui/box";
 import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import React from "react";
+import { Linking, Pressable } from "react-native";
 
 interface TipCardProps {
   content: string;
@@ -10,6 +11,7 @@ interface TipCardProps {
   difficulty: string;
   platform: string;
   onPress?: () => void;
+  sourceUrl: string;
 }
 
 const TipCard = ({
@@ -18,7 +20,20 @@ const TipCard = ({
   category,
   difficulty,
   platform,
+  sourceUrl
 }: TipCardProps) => {
+  const handleArticleUrl = async () => {
+    if (!sourceUrl) return;
+
+    const supported = await Linking.canOpenURL(sourceUrl);
+
+    if (supported) {
+      await Linking.openURL(sourceUrl);
+    } else {
+      console.warn(`Cannot open URL: ${sourceUrl}`);
+    }
+  };
+
   return (
     <Box className="rounded-2xl bg-card p-4">
       {/* Category + Difficulty */}
@@ -58,9 +73,11 @@ const TipCard = ({
       <HStack className="mt-4 items-center justify-between">
         <Text className="text-xs text-muted-foreground">{platform}</Text>
 
-        <Text className="text-xs font-medium text-accent-foreground">
-          Read more →
-        </Text>
+        <Pressable onPress={handleArticleUrl}>
+          <Text className="text-xs font-medium text-accent-foreground">
+            Read more →
+          </Text>
+        </Pressable>
       </HStack>
     </Box>
   );

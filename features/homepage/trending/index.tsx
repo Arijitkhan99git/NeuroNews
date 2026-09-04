@@ -4,10 +4,13 @@ import { SectionHeading } from "@/components/utils/SectionHeading";
 import { useTrendingNews } from "@/hooks/useTrendingNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { router } from "expo-router";
-import { ArrowRight } from "lucide-react-native";
+import { AlertCircle, ArrowRight, TrendingUp } from "lucide-react-native";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
 import TrendingCard from "./TrendingCard";
+import TrendingCardSkeleton from "./TrendingCardSkeleton";
+
+const SKELETON_COUNT = 3;
 
 const TrendingHomePage = () => {
   const { trendingData, isLoading, isError, error } = useTrendingNews();
@@ -16,6 +19,57 @@ const TrendingHomePage = () => {
   const data = trendingData
     ? trendingData.trends[languageCode].slice(0, 3)
     : [];
+
+  const renderContent = () => {
+    if (isLoading) {
+      return (
+        <View className="rounded-2xl bg-card border border-border px-4">
+          {Array.from({ length: SKELETON_COUNT }).map((_, i) => (
+            <TrendingCardSkeleton key={i} />
+          ))}
+        </View>
+      );
+    }
+
+    if (isError) {
+      return (
+        <View className="rounded-2xl bg-card border border-border px-4 py-6 items-center justify-center gap-2">
+          <AlertCircle size={22} color="#9CA3AF" />
+          <Text className="text-muted-foreground text-sm text-center">
+            Could not load trending topics.
+          </Text>
+          {error?.message ? (
+            <Text className="text-muted-foreground text-xs text-center opacity-70">
+              {error.message}
+            </Text>
+          ) : null}
+        </View>
+      );
+    }
+
+    if (data.length === 0) {
+      return (
+        <View className="rounded-2xl bg-card border border-border px-4 py-6 items-center justify-center gap-2">
+          <TrendingUp size={22} color="#9CA3AF" />
+          <Text className="text-muted-foreground text-sm text-center">
+            No trending topics right now.
+          </Text>
+        </View>
+      );
+    }
+
+    return (
+      <View className="rounded-2xl bg-card border border-border px-4">
+        {data.map((item, index) => (
+          <TrendingCard
+            key={`${item.title}-${index}`}
+            item={item}
+            index={index}
+          />
+        ))}
+      </View>
+    );
+  };
 
   return (
     <VStack>
@@ -38,15 +92,7 @@ const TrendingHomePage = () => {
         </Pressable>
       </HStack>
 
-      <View className="rounded-2xl bg-card border border-border px-4">
-        {data?.map((item, index) => (
-          <TrendingCard
-            key={`${item.title}-${index}`}
-            item={item}
-            index={index}
-          />
-        ))}
-      </View>
+      {renderContent()}
     </VStack>
   );
 };

@@ -6,6 +6,8 @@ import React, { useMemo } from "react";
 
 import { SectionHeading } from "@/components/utils/SectionHeading";
 import { useAITips } from "@/hooks/useAITips";
+import { router } from "expo-router";
+import { Pressable } from "react-native";
 import TipCard from "./TipCard";
 
 const AiTipsHomePage = () => {
@@ -56,13 +58,17 @@ const AiTipsHomePage = () => {
           category={item.category}
           difficulty={item.difficulty}
           platform={item.platform}
+          sourceUrl={item.sourceUrl}
         />
       ))}
 
       {/* View all */}
-      <Text className="mt-1 text-center text-sm font-semibold text-secondary">
-        View all tips →
-      </Text>
+      <Pressable onPress={() => router.push("/tips")}>
+
+        <Text className="mt-1 text-center text-sm font-semibold text-secondary">
+          View all tips →
+        </Text>
+      </Pressable>
     </VStack>
   );
 };

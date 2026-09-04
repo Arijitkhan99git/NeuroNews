@@ -6,9 +6,9 @@ import { VStack } from "@/components/ui/vstack";
 import { SectionHeading } from "@/components/utils/SectionHeading";
 import { useTrendingFilterStore } from "@/features/filterModal/filterStore/useTrendingFilterStore";
 import TrendingFilterModal from "@/features/filterModal/TrendingFilterModal";
+import NoResultsFound from "@/features/noResultFound/NoResultFound";
 import TrendingCardList from "@/features/trending/TrendingCardList";
 import TrendingCardSkeleton from "@/features/trending/TrendingCardSkeleton";
-import NoResultsFound from "@/features/noResultFound/NoResultFound";
 import { useTrendingNews } from "@/hooks/useTrendingNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { AlertTriangle, Menu, X } from "lucide-react-native";
@@ -78,7 +78,7 @@ const Trends = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const { trendingData, isLoading, isError, error } = useTrendingNews();
+  const { trendingData, isLoading, isError, error, refetch, isRefetching } = useTrendingNews();
 
   const { setTrendingNews } = useTrendingFilterStore();
   const selectedCategories = useTrendingFilterStore(
@@ -192,6 +192,8 @@ const Trends = () => {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="on-drag"
+          onRefresh={refetch}
+          refreshing={isRefetching}
         />
 
         {isModalVisible && (
