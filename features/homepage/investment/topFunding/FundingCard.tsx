@@ -15,7 +15,7 @@ const FundingCard = ({ company, amount, sector, detail }: FundingCardProps) => {
     <Box className="mb-3 rounded-xl bg-card p-4">
       <HStack className="items-center justify-between">
         <Text
-          className="flex-1 text-base font-semibold text-gray-200"
+          className="flex-1 text-base font-semibold text-primaryText"
           numberOfLines={1}
         >
           {company}

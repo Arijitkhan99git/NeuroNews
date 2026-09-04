@@ -1,6 +1,8 @@
 import { LucideIcon, SearchX } from "lucide-react-native";
+import { Box } from "@/components/ui/box";
+import { useColorScheme } from "nativewind";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 
 interface NoResultsFoundProps {
   icon?: LucideIcon;
@@ -11,15 +13,18 @@ interface NoResultsFoundProps {
 
 const NoResultsFound = ({
   icon: Icon = SearchX,
-  title = "No Result Found!",
-  description,
-  iconSize = 40,
+  title = "No results found",
+  description = "Try adjusting your filters.",
+  iconSize = 52,
 }: NoResultsFoundProps) => {
+  const { colorScheme } = useColorScheme();
+  const iconMuted = colorScheme === "dark" ? "#9ca3af" : "#64748b";
+
   return (
-    <View className="items-center justify-center py-16 px-6">
-      <View className="w-20 h-20 rounded-full  items-center justify-center mb-1">
-        <Icon color="#9ca3af" size={iconSize} strokeWidth={1.5} />
-      </View>
+    <Box className="flex-1 items-center justify-center py-20 px-4">
+      <Box className="bg-surface border border-surface-border p-6 rounded-full mb-6">
+        <Icon color={iconMuted} size={iconSize} strokeWidth={1.5} />
+      </Box>
 
       <Text className="text-foreground text-base font-semibold text-center">
         {title}
@@ -30,7 +35,7 @@ const NoResultsFound = ({
           {description}
         </Text>
       ) : null}
-    </View>
+    </Box>
   );
 };
 

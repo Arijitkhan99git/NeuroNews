@@ -23,7 +23,7 @@ export function ArticleCard({ item, onPress }: ArticleCardProps) {
 
         <Text
           numberOfLines={2}
-          className="text-gray-300 text-lg font-medium mb-2"
+          className="text-primaryText text-lg font-medium mb-2"
         >
           {item.content}
         </Text>

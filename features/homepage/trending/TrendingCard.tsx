@@ -13,7 +13,7 @@ const TrendingCard = ({ item, index }: TrendingCardProps) => {
     <Pressable className="flex-row py-4 border-b border-border">
       {/* Rank */}
       <View className="ml-1 mr-3">
-        <Text className="text-sm font-bold text-gray-400">
+        <Text className="text-sm font-bold text-muted-foreground">
           {String(index + 1).padStart(2, "0")}
         </Text>
       </View>
@@ -40,7 +40,7 @@ const TrendingCard = ({ item, index }: TrendingCardProps) => {
           <View className="flex-row items-center">
             <Sparkles size={11} color="#10B981" />
 
-            <Text className="ml-1 text-[10px] font-semibold text-emerald-400">
+            <Text className="ml-1 text-[10px] font-semibold text-emerald-500">
               {item.momentum.toUpperCase()}
             </Text>
           </View>

@@ -6,13 +6,17 @@ import { useLanguageStore } from "@/store/useLanguageStore";
 import { router } from "expo-router";
 import { AlertCircle, ArrowRight, TrendingUp } from "lucide-react-native";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View, useColorScheme } from "react-native";
 import TrendingCard from "./TrendingCard";
 import TrendingCardSkeleton from "./TrendingCardSkeleton";
 
 const SKELETON_COUNT = 3;
 
 const TrendingHomePage = () => {
+  const colorScheme = useColorScheme();
+  const iconMuted = colorScheme === "dark" ? "#9CA3AF" : "#64748b";
+  const iconActive = colorScheme === "dark" ? "#b9a0f8cc" : "#6D28D9";
+
   const { trendingData, isLoading, isError, error } = useTrendingNews();
   const languageCode = useLanguageStore((s) => s.languageCode);
 
@@ -34,7 +38,7 @@ const TrendingHomePage = () => {
     if (isError) {
       return (
         <View className="rounded-2xl bg-card border border-border px-4 py-6 items-center justify-center gap-2">
-          <AlertCircle size={22} color="#9CA3AF" />
+          <AlertCircle size={22} color={iconMuted} />
           <Text className="text-muted-foreground text-sm text-center">
             Could not load trending topics.
           </Text>
@@ -50,7 +54,7 @@ const TrendingHomePage = () => {
     if (data.length === 0) {
       return (
         <View className="rounded-2xl bg-card border border-border px-4 py-6 items-center justify-center gap-2">
-          <TrendingUp size={22} color="#9CA3AF" />
+          <TrendingUp size={22} color={iconMuted} />
           <Text className="text-muted-foreground text-sm text-center">
             No trending topics right now.
           </Text>
@@ -88,7 +92,7 @@ const TrendingHomePage = () => {
         >
           <Text className="text-sm text-secondary">View All</Text>
 
-          <ArrowRight size={18} color="#b9a0f8cc" />
+          <ArrowRight size={18} color={iconActive} />
         </Pressable>
       </HStack>
 

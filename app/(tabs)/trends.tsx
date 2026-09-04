@@ -11,20 +11,29 @@ import TrendingCardList from "@/features/trending/TrendingCardList";
 import TrendingCardSkeleton from "@/features/trending/TrendingCardSkeleton";
 import { useTrendingNews } from "@/hooks/useTrendingNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
-import { AlertTriangle, Menu, X } from "lucide-react-native";
+import { useColorScheme } from "nativewind";
+import { AlertTriangle, Menu, X, SlidersHorizontal } from "lucide-react-native";
+import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useMemo, useState } from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, Text, View, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const TrendsHeader = ({
   query,
   onChangeQuery,
   setModalVisible,
+  activeFilterCount,
 }: {
   query: string;
   onChangeQuery: (text: string) => void;
   setModalVisible: (visible: boolean) => void;
-}) => (
+  activeFilterCount: number;
+}) => {
+  const { colorScheme } = useColorScheme();
+  const isDark = colorScheme === "dark";
+  const iconMuted = isDark ? "#94a3b8" : "#64748b";
+
+  return (
   <VStack>
     <HStack className="justify-between items-center gap-20">
       <VStack className="flex-1">
@@ -37,42 +46,42 @@ const TrendsHeader = ({
         </Text>
       </VStack>
 
-      <Box className="flex-shrink-0">
-        <Pressable onPress={() => setModalVisible(true)}>
-          <Menu color="white" size={26} />
-        </Pressable>
-      </Box>
     </HStack>
 
-    <Box className="mt-6 mb-6">
-      <Input
-        isDisabled={false}
-        isInvalid={false}
-        className="bg-muted border border-border rounded-2xl px-4 py-1 flex-row items-center"
-      >
-        <InputSlot>
-          <InputIcon
-            as={SearchIcon}
-            className="w-5 h-5 text-muted-foreground"
-          />
-        </InputSlot>
-        <InputField
-          placeholder="Search..."
+    {/* Search + Filter row */}
+    <View className="flex-row gap-2.5 items-center mt-6 mb-6">
+      <View className="flex-1 flex-row items-center bg-surface border border-surface-border rounded-2xl px-3 py-1 gap-2">
+        <Ionicons name="search-outline" size={16} color={iconMuted} />
+        <TextInput
           value={query}
           onChangeText={onChangeQuery}
-          className="text-base"
+          placeholder="Search trends..."
+          placeholderTextColor={iconMuted}
+          className="flex-1 text-[14px] text-foreground"
         />
         {query.length > 0 && (
-          <InputSlot>
-            <Pressable onPress={() => onChangeQuery("")} hitSlop={8}>
-              <InputIcon as={X} className="w-5 h-5 text-muted-foreground" />
-            </Pressable>
-          </InputSlot>
+          <Pressable onPress={() => onChangeQuery("")} hitSlop={8}>
+            <X size={15} color={iconMuted} />
+          </Pressable>
         )}
-      </Input>
-    </Box>
+      </View>
+
+      <Pressable
+        onPress={() => setModalVisible(true)}
+        className={`w-11 h-11 rounded-2xl border items-center justify-center flex-row gap-1 ${activeFilterCount > 0
+            ? "bg-primary-deep border-primary-deep"
+            : "bg-surface border-surface-border"
+          }`}
+      >
+        <SlidersHorizontal size={18} color={activeFilterCount > 0 ? "#fff" : iconMuted} />
+        {activeFilterCount > 0 && (
+          <Text className="text-xs text-white font-bold">{activeFilterCount}</Text>
+        )}
+      </Pressable>
+    </View>
   </VStack>
-);
+  );
+};
 
 const Trends = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -84,6 +93,8 @@ const Trends = () => {
   const selectedCategories = useTrendingFilterStore(
     (s) => s.selectedCategories,
   );
+  const activeFilterCount = selectedCategories.length;
+
   const languageCode = useLanguageStore((s) => s.languageCode);
 
   const trendsData = useMemo(
@@ -115,6 +126,7 @@ const Trends = () => {
       query={searchQuery}
       onChangeQuery={setSearchQuery}
       setModalVisible={setIsModalVisible}
+      activeFilterCount={activeFilterCount}
     />
   );
 

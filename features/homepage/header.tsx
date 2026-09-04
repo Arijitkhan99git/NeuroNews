@@ -4,9 +4,12 @@ import { GradientText } from "@/components/utils/GradientText";
 import { useThemeStore } from "@/store/useThemeStore";
 import { Bell } from "lucide-react-native";
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, useColorScheme, View } from "react-native";
 
 const DashboardHeader = () => {
+  const colorScheme = useColorScheme();
+  const iconForeground = colorScheme === "dark" ? "#FFFFFF" : "#0F172A";
+
   const today = new Date();
 
   // Format: "Monday, August 24"
@@ -44,13 +47,13 @@ const DashboardHeader = () => {
       <View className="flex flex-row justify-between">
         <Box className="flex flex-row gap-2 items-center">
           <AppIcon />
-          <Text className="text-[#5d3de8] text-2xl font-semibold">
+          <Text className="text-brand-indigo text-2xl font-semibold">
             NEURO NEWS
           </Text>
         </Box>
 
-        <Box className="p-2 border border-gray-500 rounded-xl bg-gray-700 flex justify-center items-center self-center">
-          <Bell color="#FFFFFF" strokeWidth={2} size={23} />
+        <Box className="p-2 border border-surface-border rounded-xl bg-surface-elevated flex justify-center items-center self-center">
+          <Bell color={iconForeground} strokeWidth={2} size={23} />
         </Box>
       </View>
 
@@ -61,11 +64,11 @@ const DashboardHeader = () => {
           {formattedDate}
         </GradientText>
 
-        <Text className="text-gray-200 font-semibold text-4xl">
+        <Text className="text-foreground font-semibold text-4xl">
           {getGreeting()}
         </Text>
 
-        <Text className="text-gray-400"> Your daily intelligence on AI.</Text>
+        <Text className="text-muted-foreground"> Your daily intelligence on AI.</Text>
       </View>
     </View>
   );

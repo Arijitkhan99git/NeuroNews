@@ -3,6 +3,7 @@ import CustomBadge from "@/components/utils/Badge";
 import ImpactBadge from "@/components/utils/ImpactBadge";
 import { BlurView } from "expo-blur";
 import { ArrowRight, X } from "lucide-react-native";
+import { useColorScheme } from "nativewind";
 import React, { useCallback, useEffect, useRef } from "react";
 import {
   Dimensions,
@@ -30,6 +31,8 @@ const ArticleDetailModal = ({
   initialIndex,
   onClose,
 }: ArticleDetailModalProps) => {
+  const { colorScheme } = useColorScheme();
+  const iconActive = colorScheme === "dark" ? "#b9a0f8cc" : "#6D28D9";
   const listRef = useRef<FlatList>(null);
 
   // Scroll to the tapped card whenever the modal opens or the starting index changes
@@ -107,14 +110,14 @@ const ArticleDetailModal = ({
             </View>
 
             {/* Content */}
-            <Text className="text-gray-100 text-base tracking-wide leading-6">
+            <Text className="text-primaryText text-base tracking-wide leading-6">
               {item.content}
             </Text>
 
             {/* Source */}
             <View className="flex-row items-center gap-2">
-              <Text className="text-gray-400 text-sm">Source:</Text>
-              <Text className="text-gray-300 text-sm font-semibold">
+              <Text className="text-muted-foreground text-sm">Source:</Text>
+              <Text className="text-foreground text-sm font-semibold">
                 {item.source}
               </Text>
             </View>
@@ -124,8 +127,8 @@ const ArticleDetailModal = ({
               onPress={() => handleArticleUrl(item)}
               className="flex-row items-center gap-1 mt-2"
             >
-              <Text className="text-muted text-sm">Read full article</Text>
-              <ArrowRight color="#b9a0f8cc" size={14} />
+              <Text className="text-muted-foreground text-sm">Read full article</Text>
+              <ArrowRight color={iconActive} size={14} />
             </Pressable>
           </View>
 

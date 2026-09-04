@@ -44,9 +44,8 @@ const MarketMoveItem = ({
 
         {direction && (
           <Text
-            className={`ml-2 text-sm font-bold ${
-              isUp ? "text-emerald-400" : "text-red-400"
-            }`}
+            className={`ml-2 text-sm font-bold ${isUp ? "text-emerald-400" : "text-red-400"
+              }`}
           >
             {isUp ? "↗" : "↘"} {change}
           </Text>
@@ -59,7 +58,7 @@ const MarketMoveItem = ({
         </Text>
       )}
 
-      <Text className="mt-1 text-xs text-muted-foreground">{timestamp}</Text>
+      <Text className="mt-1 text-xs text-primaryText">{timestamp}</Text>
     </Box>
   );
 };

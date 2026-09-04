@@ -59,6 +59,7 @@ const AiTipsHomePage = () => {
           difficulty={item.difficulty}
           platform={item.platform}
           sourceUrl={item.sourceUrl}
+          itemId={item.id}
         />
       ))}
 

@@ -1,4 +1,4 @@
-﻿import { TrendItem } from "@/api/model/trending-model";
+import { TrendItem } from "@/api/model/trending-model";
 import { Sparkles } from "lucide-react-native";
 import React from "react";
 import { Text, View } from "react-native";
@@ -17,7 +17,7 @@ const TrendingCardList = ({ item, index }: TrendingCardListProps) => {
     <View className="flex-row py-5 border-b border-border">
       {/* Rank */}
       <View className="ml-1 mr-3">
-        <Text className="text-sm font-bold text-gray-400">
+        <Text className="text-sm font-bold text-muted-foreground">
           {String(index + 1).padStart(2, "0")}
         </Text>
       </View>
@@ -42,7 +42,7 @@ const TrendingCardList = ({ item, index }: TrendingCardListProps) => {
         <View className="flex-row items-center mt-2">
           <View className="flex-row items-center">
             <Sparkles size={11} color="#10B981" />
-            <Text className="ml-1 text-[10px] font-semibold text-emerald-400">
+            <Text className="ml-1 text-[10px] font-semibold text-emerald-500">
               {item.momentum.toUpperCase()}
             </Text>
           </View>
