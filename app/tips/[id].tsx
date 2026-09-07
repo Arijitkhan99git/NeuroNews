@@ -131,6 +131,52 @@ const TipReelCard = ({ item, isLast }: { item: AiTipItem; isLast: boolean }) => 
     );
 };
 
+/* ─── Skeleton reel card ─────────────────────────────────── */
+const TipDetailsSkeleton = () => {
+    const insets = useSafeAreaInsets();
+    return (
+        <View
+            className="overflow-hidden relative px-5 pb-8 flex-1"
+            style={{ paddingTop: insets.top + 60 }}
+        >
+            <View className="flex-1 gap-4">
+                {/* Badges skeleton */}
+                <View className="flex-row items-center gap-2">
+                    <View className="h-6 w-24 rounded-full bg-surface-border" />
+                    <View className="h-6 w-20 rounded-full bg-surface-border" />
+                </View>
+
+                {/* Content headline skeleton */}
+                <View className="gap-2 mt-1">
+                    <View className="h-5 w-[92%] rounded-md bg-surface-border" />
+                    <View className="h-5 w-[75%] rounded-md bg-surface-border" />
+                </View>
+
+                {/* Tip box skeleton */}
+                <View className="rounded-2xl bg-surface border border-surface-border p-4 gap-2.5 mt-2">
+                    <View className="h-3.5 w-12 rounded bg-surface-border" />
+                    <View className="h-4 w-[95%] rounded bg-surface-border mt-1" />
+                    <View className="h-4 w-[85%] rounded bg-surface-border" />
+                    <View className="h-4 w-[60%] rounded bg-surface-border" />
+                    <View className="h-4 w-28 rounded bg-surface-border mt-2" />
+                </View>
+
+                {/* Footer skeleton */}
+                <View className="flex-row items-center justify-between mt-auto">
+                    <View className="flex-row items-center gap-2.5">
+                        <View className="w-9 h-9 rounded-full bg-surface-border" />
+                        <View className="h-4 w-24 rounded bg-surface-border" />
+                    </View>
+                    <View className="flex-row gap-3">
+                        <View className="h-4 w-12 rounded bg-surface-border" />
+                        <View className="h-4 w-12 rounded bg-surface-border" />
+                    </View>
+                </View>
+            </View>
+        </View>
+    );
+};
+
 /* ─── Screen ─────────────────────────────────────────────── */
 const TipDetails = () => {
     const { id } = useLocalSearchParams<{ id: string }>();
@@ -169,6 +215,22 @@ const TipDetails = () => {
         ),
         [tips?.length],
     );
+
+    if (isLoading && (!tips || tips.length === 0)) {
+        return (
+            <View className="flex-1 bg-background">
+                <TipDetailsSkeleton />
+                <Pressable
+                    onPress={() => router.back()}
+                    className="absolute left-0 flex-row items-center gap-1.5 px-5 py-2.5 z-10"
+                    style={{ top: insets.top }}
+                >
+                    <Ionicons name="arrow-back-outline" size={22} color={iconMuted} />
+                    <Text className="text-muted-foreground">Tips</Text>
+                </Pressable>
+            </View>
+        );
+    }
 
     if (!tips?.length) return null;
 

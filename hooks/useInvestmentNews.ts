@@ -2,11 +2,12 @@
 import { QUERY_CONFIG } from "@/api/config";
 import { fetchQueryKey } from "@/api/query-key";
 import { fetchInvestmentNews } from "@/api/services/investment-services";
-import { useLatestPeriodStore } from "@/store/usePeriodIdStore";
 import { useQuery } from "@tanstack/react-query";
 
 export function useInvestmentNews() {
-  const latestPeriodId = useLatestPeriodStore((s) => s.latestPeriodId);
+  // const latestPeriodId = useLatestPeriodStore((s) => s.latestPeriodId);
+
+  const latestPeriodId = "2026-08-24"
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: fetchQueryKey.investment(latestPeriodId ?? ""),

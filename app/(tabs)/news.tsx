@@ -83,7 +83,7 @@ const NewsHeader = ({
           <Text className="text-sm font-bold text-foreground">Tech News</Text>
         </View>
         <View className="bg-card border border-muted rounded-2xl px-4 py-2" >
-          <Text className="text-sm font-bold text-foreground">Market Moves</Text>
+          <Text className="text-sm font-bold text-foreground">Investment News</Text>
         </View>
         <Pressable onPress={() => router.push("/tips")}>
           <View className="bg-card border border-muted rounded-2xl px-4 py-2">
