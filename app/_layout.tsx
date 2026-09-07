@@ -55,6 +55,7 @@ export default function RootLayout() {
 
             }}>
             <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="investment/[id]" />
             <Stack.Screen name="tips/[id]" />
             <Stack.Screen name="news/[id]" />
           </Stack>

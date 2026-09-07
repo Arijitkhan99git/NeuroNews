@@ -1,21 +1,21 @@
-interface Author {
+export interface Author {
   name: string;
   handle: string;
   avatar: string;
   verified: boolean;
 }
 
-interface Metrics {
+export interface Metrics {
   comments: number;
   retweets: number;
   likes: number;
   views: string;
 }
 
-type RoundCategory = "Early" | "Unknown"; // widen as more categories show up (e.g. "Growth", "Late")
+export type RoundCategory = "Early" | "Unknown" | string;
 
 // --- primaryMarket: funding rounds ---
-interface FundingItem {
+export interface FundingItem {
   id: number;
   author: Author;
   content: string;
@@ -31,9 +31,9 @@ interface FundingItem {
 }
 
 // --- secondaryMarket: public market moves (IPOs, share placements, earnings) ---
-type PriceDirection = "up" | "down";
+export type PriceDirection = "up" | "down";
 
-interface SecondaryMarketItem {
+export interface SecondaryMarketItem {
   id: number;
   author: Author;
   content: string;
@@ -48,9 +48,9 @@ interface SecondaryMarketItem {
 }
 
 // --- ma: mergers & acquisitions ---
-type DealType = "Acquisition" | "Merger" | string; // localized values appear too (e.g. "Übernahme", "收购") — widen to string if you don't translate dealType client-side
+export type DealType = "Acquisition" | "Merger" | string;
 
-interface MergerAcquisitionItem {
+export interface MergerAcquisitionItem {
   id: number;
   author: Author;
   content: string;

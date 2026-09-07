@@ -82,9 +82,12 @@ const NewsHeader = ({
         <View className="bg-muted border border-border rounded-2xl px-4 py-2" style={styles.capsuleShadow}>
           <Text className="text-sm font-bold text-foreground">Tech News</Text>
         </View>
-        <View className="bg-card border border-muted rounded-2xl px-4 py-2" >
-          <Text className="text-sm font-bold text-foreground">Investment News</Text>
-        </View>
+        <Pressable onPress={() => router.push("/investment")}>
+          <View className="bg-card border border-muted rounded-2xl px-4 py-2" >
+            <Text className="text-sm font-bold text-foreground">Investment News</Text>
+          </View>
+        </Pressable>
+
         <Pressable onPress={() => router.push("/tips")}>
           <View className="bg-card border border-muted rounded-2xl px-4 py-2">
             <Text className="text-sm font-bold text-foreground">Tips</Text>
