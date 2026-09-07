@@ -5,31 +5,31 @@ import { useTechNews } from "@/hooks/useTechNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { router } from "expo-router";
 import { ArrowRight, View } from "lucide-react-native";
-import React, { useState } from "react"; // 1. Added useState
+import React, { useState } from "react";
 import { Dimensions, FlatList, Pressable, Text } from "react-native";
 import { ArticleCard } from "./ArticleCard";
 import ArticleCardSkeleton from "./ArticleCardSkeleton";
+import ArticleDetailModal from "./ArticleDetailModal";
 import { ListFooterComponent } from "./FooterComponent";
 
 const TopStories = () => {
   const { techNewsData, isLoading, isError, error } = useTechNews();
   const languageCode = useLanguageStore((s) => s.languageCode);
-  const [isAtEnd, setIsAtEnd] = useState(false); // 2. State to track footer visibility
+  const [isAtEnd, setIsAtEnd] = useState(false);
+
+  // Modal state
+  const [modalIndex, setModalIndex] = useState<number | null>(null);
 
   const newsData = techNewsData ? techNewsData[languageCode] : [];
   const limitedNewsData = newsData.slice(0, 6);
 
   const CARD_WIDTH = Dimensions.get("window").width * 0.75;
-  const GAP = 12; // Snap interval offset
+  const GAP = 12;
 
-  // 3. Scroll handler to determine if the footer is visible
   const handleScroll = (event: any) => {
     const { contentOffset, layoutMeasurement, contentSize } = event.nativeEvent;
-
-    // Check if scrolled within 50px of the maximum horizontal width
     const isNearEnd =
       contentOffset.x + layoutMeasurement.width >= contentSize.width - 50;
-
     setIsAtEnd(isNearEnd);
   };
 
@@ -38,7 +38,6 @@ const TopStories = () => {
       <HStack className="justify-between items-center mb-5">
         <SectionHeading>Top Stories</SectionHeading>
 
-        {/* 4. Conditionally render the button based on scroll position */}
         {!isAtEnd && (
           <Pressable
             className="flex flex-row gap-1"
@@ -81,14 +80,28 @@ const TopStories = () => {
           horizontal
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()}
-          renderItem={({ item }) => <ArticleCard item={item} />}
+          renderItem={({ item, index }) => (
+            <ArticleCard
+              item={item}
+              onPress={() => setModalIndex(index)}
+            />
+          )}
           ListFooterComponent={<ListFooterComponent />}
           snapToInterval={CARD_WIDTH + GAP}
           decelerationRate="fast"
           snapToAlignment="start"
-          // 5. Connect scrolling events to the handler
           onScroll={handleScroll}
-          scrollEventThrottle={16} // Fires 60 times a second for smooth detection
+          scrollEventThrottle={16}
+        />
+      )}
+
+      {/* Swipeable detail modal — scoped to limitedNewsData only */}
+      {modalIndex !== null && (
+        <ArticleDetailModal
+          visible={modalIndex !== null}
+          items={limitedNewsData}
+          initialIndex={modalIndex}
+          onClose={() => setModalIndex(null)}
         />
       )}
     </VStack>

@@ -10,12 +10,12 @@ import { styled } from "nativewind";
 
 import React, { useCallback, useMemo, useRef } from "react";
 import {
-    Dimensions,
-    FlatList,
-    Linking,
-    Pressable,
-    Text,
-    View,
+  Dimensions,
+  FlatList,
+  Linking,
+  Pressable,
+  Text,
+  View,
 } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
 
@@ -70,12 +70,12 @@ const NewsDetails = () => {
             <ImpactBadge impact={item.impact} />
           </View>
 
-          <Text className="text-gray-100 mb-2 text-lg tracking-wide py-5">
+          <Text className="text-secondaryText mb-2 text-lg tracking-wide py-5">
             {item.content}
           </Text>
 
           <View className="flex items-center flex-row gap-2">
-            <Text className="text-gray-300 text-sm">Source Name:</Text>
+            <Text className="text-primaryText text-sm">Source Name:</Text>
             <Text className="text-gray-400 font-semibold ">{item.source}</Text>
           </View>
 

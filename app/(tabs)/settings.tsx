@@ -2,7 +2,6 @@ import AppIcon from "@/components/appIcon/AppIcon";
 import { Box } from "@/components/ui/box";
 import Appearance from "@/features/settings/apperance/appearance";
 import { PreferencesSection } from "@/features/settings/preferences/PreferencesSection";
-import UserImage from "@/features/settings/userImage";
 import React from "react";
 import { Text } from "react-native";
 
@@ -18,7 +17,7 @@ const Settings = () => {
           <Text className="text-gray-300 text-3xl font-semibold">Settings</Text>
         </Box>
 
-        <UserImage />
+
         <Appearance />
         <PreferencesSection />
       </SafeAreaView>

@@ -2,11 +2,11 @@ import { components } from "@/constants/theme";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
 import {
-  Bookmark,
   House,
   Newspaper,
+  Play,
   Settings,
-  TrendingUp,
+  TrendingUp
 } from "lucide-react-native";
 import React from "react";
 
@@ -87,11 +87,11 @@ const TabLayout = () => {
         />
 
         <Tabs.Screen
-          name="saved"
+          name="videos"
           options={{
-            title: "Saved",
+            title: "Videos",
             tabBarIcon: ({ color, size }) => (
-              <Bookmark color={color} size={size} />
+              <Play color={color} size={size} />
             ),
           }}
         />

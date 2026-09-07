@@ -21,7 +21,7 @@ const NewsCard = ({ item }: { item: NewsItem }) => {
       <View className="gap-3">
         <CustomBadge text={item.category} />
 
-        <Text numberOfLines={3} className="text-gray-300  mb-2">
+        <Text numberOfLines={3} className="text-primaryText  mb-2">
           {item.content}
         </Text>
 

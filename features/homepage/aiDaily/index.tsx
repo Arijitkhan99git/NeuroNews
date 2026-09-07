@@ -26,16 +26,16 @@ function StatItem({ count, label, isLoading }: StatItemProps) {
     <View className="flex-1 items-center justify-center py-4">
       {/* Count */}
       {isLoading ? (
-        <Skeleton variant="rounded" className="h-7 w-12 mb-2 bg-gray-700" />
+        <Skeleton variant="rounded" className="h-7 w-12 mb-2 bg-surface-border" />
       ) : (
         <Text className="text-foreground text-2xl font-bold mb-1">{count}</Text>
       )}
 
       {/* Label */}
       {isLoading ? (
-        <Skeleton variant="rounded" className="h-3 w-14 bg-gray-700" />
+        <Skeleton variant="rounded" className="h-3 w-14 bg-surface-border" />
       ) : (
-        <Text className="text-[#817EA1] text-xs tracking-wide">{label}</Text>
+        <Text className="text-daily-label text-xs tracking-wide">{label}</Text>
       )}
     </View>
   );
@@ -86,10 +86,7 @@ const AiDaily = () => {
 
   return (
     <View
-      className={clsx(
-        isDark ? "bg-[#100F19]" : "bg-gray-200",
-        "px-4 py-6 rounded-xl",
-      )}
+      className="px-4 py-6 rounded-xl bg-daily-bg"
     >
       <View className="flex flex-row items-center justify-between mb-5">
         <View className="px-3 py-1 bg-badgebackground self-start rounded-md">
@@ -97,7 +94,7 @@ const AiDaily = () => {
             AI DAILY INTEL
           </Text>
         </View>
-        <Cpu color="#A684FF" />
+        <Cpu color={isDark ? "#A684FF" : "#6D28D9"} />
       </View>
 
       <View className="flex-row items-stretch bg-card rounded-2xl border border-border overflow-hidden">

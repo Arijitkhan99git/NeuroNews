@@ -6,16 +6,15 @@
 /* ─── Theme: design tokens (light / dark) ─────────────────────────
    Design system: Neuro News
    ─── Dark palette ───────────────────────────────────────────────
-   Primary   #00B4C8  (cyan / teal)
+   Primary   #a78bfa  (soft violet — used in tips badges, labels, links)
    Secondary #6366F1  (indigo / purple)
    Tertiary  #8B5CF6  (violet)
    Neutral   #FAFAFA  (near-white)
    ─── Light palette ──────────────────────────────────────────────
-   Primary   #4F46E5  (indigo blue)
+   Primary   #6D28D9  (deep violet — high contrast on light bg)
    Secondary #8B5CF6  (violet)
    Tertiary  #A54100  (burnt orange)
    Neutral   #0F172A  (dark navy)
-   Muted     #b9a0f8cc  (lavender)
 
    1. :root              — light defaults (all platforms)
    2. @media dark :root  — dark defaults; nativewind maps this to
@@ -23,105 +22,223 @@
    3. :root.dark / :root.light — higher specificity for web class toggle. */
 @layer theme {
   :root {
-    /* Light theme — Primary: #4F46E5  Secondary: #8B5CF6  Tertiary: #A54100  Neutral: #0F172A */
-    --primary: 79 70 229; /* #4F46E5  indigo */
+    /* Light theme — Primary: #6D28D9  Secondary: #8B5CF6  Neutral: #0F172A */
+    --primary: 109 40 217;
+    /* #6D28D9  deep violet — high contrast on light */
     --primary-foreground: 255 255 255;
     --card: 255 255 255;
-    --secondary: 139 92 246; /* #8B5CF6  violet */
-    --secondary-foreground: 243 244 246;
-    --background: 241 239 252; /* soft indigo-tinted white */
+    /* pure white cards */
+    --secondary: 139 92 246;
+    /* #8B5CF6  violet */
+    --secondary-foreground: 91 33 182;
+    --background: 250 250 250;
+    /* clean off-white */
     --popover: 255 255 255;
     --popover-foreground: 15 23 42;
-    --muted: 185 160 248 0.8; /*b9a0f8cc */
-    --muted-foreground: 99 102 120;
+    --muted: 241 245 249;
+    /* Slate 100 */
+    --muted-foreground: 71 85 105;
+    /* Slate 600 */
+    --subtle: 100 116 139;
+    /* Slate 500 */
     --destructive: 220 38 38;
-    --foreground: 15 23 42; /* #0F172A  dark navy */
-    --border: 210 212 240;
-    --input: 210 212 240;
-    --ring: 79 70 229;
+    --foreground: 15 23 42;
+    /* Slate 900 */
+    --border: 203 213 225;
+    /* #CBD5E1 */
+    --input: 203 213 225;
+    --ring: 109 40 217;
     --accent: 34 211 238 0.1;
     --accent-foreground: 34 211 238;
-    --heading: 55 65 81; /* text-gray-700 */
-    --badgebackground: 47 46 63;
-    --badgeText: 255 255 255 0.7;
-    --iconbackground: 166 132 255;
+    --heading: 30 27 75;
+    /* deep indigo heading */
+    --badgebackground: 109 40 217 0.12;
+    --badgeText: 109 40 217;
+    --iconbackground: 109 40 217;
+    --surface: 255 255 255;
+    /* pure white */
+    --surface-elevated: 241 245 249;
+    /* Slate 100 */
+    --surface-border: 226 232 240;
+    /* Slate 200 */
+    --primary-deep: 109 40 217;
+    --dim-text: 100 116 139;
+    /* Slate 500 */
+    --tip-badge-bg: 231 220 252;
+    --tip-box-bg: 242 235 253;
+    --tip-box-border: 221 203 250;
+
+    /* New icon semantic tokens */
+    --icon-muted: 100 116 139;
+    /* Slate 500 */
+    --icon-active: 109 40 217;
+    /* Primary deep violet */
+
+    /* Component specific tokens */
+    --brand-indigo: 93 61 232;
+    --daily-label: 100 116 139;
+    /* Slate 500 */
+    --daily-bg: 226 232 240;
+    /* Slate 200 */
+    --primaryText: 107 114 128;
+    /*gray-500 */
+    --secondaryText: 75 85 99;
+    /*gray-600 */
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      /* Dark theme — Primary: #A684FF  Secondary: #6366F1  Tertiary: #8B5CF6  Neutral: #FAFAFA */
-      --primary: 166 132 255; /* #A684FF  */
+      /* Dark theme — Primary: #a78bfa  Secondary: #6366F1  Neutral: #FAFAFA */
+      --primary: 167 139 250;
+      /* #a78bfa — soft violet, matches tips exactly */
       --primary-foreground: 10 10 10;
-      --card: 20 19 31; /* 14131F dark card surface */
-      --secondary: 185 160 248 0.8; /* #b9a0f8cc  */
-      --secondary-foreground: 185 160 248 0.8; /* #b9a0f8cc  */
-      --background: 6 6 9; /*#060609 near-black background */
+      --card: 18 17 28;
+      /* #12111C — slightly darker for card separation */
+      --secondary: 185 160 248 0.8;
+      /* #b9a0f8cc */
+      --secondary-foreground: 185 160 248 0.8;
+      --background: 6 6 9;
+      /* #060609 near-black */
       --popover: 22 27 34;
       --popover-foreground: 250 250 250;
       --muted: 185 160 248 0.8;
       --muted-foreground: 148 163 184;
+      /* #94a3b8 — matches tips muted text */
+      --subtle: 100 116 139;
+      /* #64748b — secondary muted */
       --destructive: 255 100 103;
-      --foreground: 250 250 250; /* #FAFAFA */
-      --border: 47 46 63; /* #2F2E3F */
+      --foreground: 241 245 249;
+      /* #f1f5f9 — matches tips content text exactly */
+      --border: 47 46 63;
+      /* #2F2E3F — original */
       --input: 40 50 62;
       --accent: 34 211 238 0.1;
       --accent-foreground: 34 211 238;
-      --ring: 0 180 200;
-      --heading: 209 213 219; /* text-gray-300 */
-      --badgebackground: 47 46 63;
-      --badgeText: 255 255 255 0.7;
-      --iconbackground: 166 132 255;
+      --ring: 167 139 250;
+      --heading: 209 213 219;
+      /* text-gray-300 */
+      --badgebackground: 55 52 78;
+      --badgeText: 167 139 250;
+      --iconbackground: 167 139 250;
+      --surface: 14 14 17;
+      /* rgba(255,255,255,0.04) on #060609 — solid equiv */
+      --surface-elevated: 21 21 24;
+      /* rgba(255,255,255,0.06) on #060609 — buttons/inputs */
+      --surface-border: 23 23 26;
+      /* rgba(255,255,255,0.07) on #060609 — card border */
+      --primary-deep: 124 58 237;
+      /* #7c3aed — deeper violet for active states */
+      --dim-text: 71 85 105;
+      /* #475569 — dim secondary text on dark */
+      --tip-badge-bg: 34 22 57;
+      /* rgba(124,58,237,0.18) on card bg — solid equiv */
+      --tip-box-bg: 25 18 39;
+      /* rgba(124,58,237,0.10) on card bg — solid equiv */
+      --tip-box-border: 43 25 75;
+      /* rgba(124,58,237,0.18) on tip-box-bg — solid */
+
+      /* New icon semantic tokens */
+      --icon-muted: 148 163 184;
+      /* Slate 400 */
+      --icon-active: 167 139 250;
+      /* Primary soft violet */
+
+      /* Component specific tokens */
+      --brand-indigo: 93 61 232;
+      --daily-label: 129 126 161;
+      --daily-bg: 16 15 25;
+      --primaryText: 209 213 219;
+      /*gray-300 */
+      --secondaryText: 243 244 246;
+      /*gray-100 */
     }
   }
 
   :root.dark {
-    /* Dark theme — Primary: #0EA5E9  Secondary: #6366F1  Tertiary: #8B5CF6  Neutral: #FAFAFA */
-    --primary: 14 165 233; /* #0EA5E9  cyan / teal */
+    /* Dark theme (class toggle) */
+    --primary: 167 139 250;
     --primary-foreground: 10 10 10;
-    --card: 22 27 34;
-    --secondary: 185 160 248 0.8; /* #b9a0f8cc  */
-    --secondary-foreground: 185 160 248 0.8; /* #b9a0f8cc  */
+    --card: 18 17 28;
+    --secondary: 185 160 248 0.8;
+    --secondary-foreground: 185 160 248 0.8;
     --background: 6 6 9;
     --popover: 22 27 34;
     --popover-foreground: 250 250 250;
     --muted: 185 160 248 0.8;
     --muted-foreground: 148 163 184;
+    --subtle: 100 116 139;
     --destructive: 255 100 103;
-    --foreground: 250 250 250; /* #FAFAFA */
-    --border: 40 50 62;
+    --foreground: 241 245 249;
+    /* #f1f5f9 */
+    --border: 47 46 63;
     --input: 40 50 62;
     --accent: 34 211 238 0.1;
     --accent-foreground: 34 211 238;
-    --ring: 0 180 200;
-    --badgebackground: 47 46 63;
-    --badgeText: 255 255 255 0.7;
+    --ring: 167 139 250;
+    --badgebackground: 55 52 78;
+    --badgeText: 167 139 250;
+    --iconbackground: 167 139 250;
+    --heading: 209 213 219;
+    --surface: 14 14 17;
+    --surface-elevated: 21 21 24;
+    --surface-border: 23 23 26;
+    --primary-deep: 124 58 237;
+    --dim-text: 71 85 105;
+    --tip-badge-bg: 34 22 57;
+    --tip-box-bg: 25 18 39;
+    --tip-box-border: 43 25 75;
 
-    --iconbackground: 166 132 255;
+    --icon-muted: 148 163 184;
+    --icon-active: 167 139 250;
+
+    --brand-indigo: 93 61 232;
+    --daily-label: 129 126 161;
+    --daily-bg: 16 15 25;
+    --primaryText: 209 213 219;
+    --secondaryText: 243 244 246;
   }
 
   :root.light {
-    /* Light theme — Primary: #4F46E5  Secondary: #8B5CF6  Tertiary: #A54100  Neutral: #0F172A */
-    --primary: 79 70 229; /* #4F46E5  indigo */
+    /* Light theme (class toggle) */
+    --primary: 109 40 217;
     --primary-foreground: 255 255 255;
     --card: 255 255 255;
-    --secondary: 139 92 246; /* #8B5CF6  violet */
-    --secondary-foreground: 243 244 246;
-    --background: 238 240 255;
+    --secondary: 139 92 246;
+    --secondary-foreground: 91 33 182;
+    --background: 250 250 250;
     --popover: 255 255 255;
     --popover-foreground: 15 23 42;
-    --muted: 185 160 248 0.8;
-    --muted-foreground: 99 102 120;
+    --muted: 241 245 249;
+    --muted-foreground: 71 85 105;
+    --subtle: 100 116 139;
     --destructive: 220 38 38;
-    --foreground: 15 23 42; /* #0F172A  dark navy */
-    --border: 210 212 240;
-    --input: 210 212 240;
-    --ring: 79 70 229;
+    --foreground: 15 23 42;
+    --border: 203 213 225;
+    --input: 203 213 225;
+    --ring: 109 40 217;
     --accent: 34 211 238 0.1;
     --accent-foreground: 34 211 238;
-    --badgebackground: 47 46 63;
-    --badgeText: 255 255 255 0.7;
+    --badgebackground: 109 40 217 0.12;
+    --badgeText: 109 40 217;
+    --iconbackground: 109 40 217;
+    --heading: 30 27 75;
+    --surface: 255 255 255;
+    --surface-elevated: 241 245 249;
+    --surface-border: 226 232 240;
+    --primary-deep: 109 40 217;
+    --dim-text: 100 116 139;
+    --tip-badge-bg: 231 220 252;
+    --tip-box-bg: 242 235 253;
+    --tip-box-border: 221 203 250;
 
-    --iconbackground: 166 132 255;
+    --icon-muted: 100 116 139;
+    --icon-active: 109 40 217;
+
+    --brand-indigo: 93 61 232;
+    --daily-label: 100 116 139;
+    --daily-bg: 226 232 240;
+    --primaryText: 107 114 128;
+    --secondaryText: 75 85 99;
   }
 }
 
@@ -136,6 +253,7 @@
   --color-popover-foreground: rgb(var(--popover-foreground));
   --color-muted: rgb(var(--muted));
   --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-subtle: rgb(var(--subtle));
   --color-destructive: rgb(var(--destructive));
   --color-foreground: rgb(var(--foreground));
   --color-border: rgb(var(--border));
@@ -147,12 +265,28 @@
   --color-badgebackground: rgb(var(--badgebackground));
   --color-badgeText: rgb(var(--badgeText));
   --color-iconbackground: rgb(var(--iconbackground));
+  --color-surface: rgb(var(--surface));
+  --color-surface-elevated: rgb(var(--surface-elevated));
+  --color-surface-border: rgb(var(--surface-border));
+  --color-primary-deep: rgb(var(--primary-deep));
+  --color-dim-text: rgb(var(--dim-text));
+  --color-tip-badge-bg: rgb(var(--tip-badge-bg));
+  --color-tip-box-bg: rgb(var(--tip-box-bg));
+  --color-tip-box-border: rgb(var(--tip-box-border));
+  --color-icon-muted: rgb(var(--icon-muted));
+  --color-icon-active: rgb(var(--icon-active));
+  --color-brand-indigo: rgb(var(--brand-indigo));
+  --color-daily-label: rgb(var(--daily-label));
+  --color-daily-bg: rgb(var(--daily-bg));
+  --color-primaryText: rgb(var(--primaryText));
+  --color-secondaryText: rgb(var(--secondaryText));
 }
 
 @layer components {
   .center {
     @apply flex items-center justify-center;
   }
+
   .title {
     @apply text-xl font-semibold text-heading;
   }

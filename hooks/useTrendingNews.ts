@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 export function useTrendingNews() {
   const latestPeriodId = useLatestPeriodStore((s) => s.latestPeriodId);
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isError, error, refetch, isRefetching } = useQuery({
     queryKey: fetchQueryKey.trending(latestPeriodId ?? ""),
     queryFn: () => fetchTrendingNews(latestPeriodId!),
     enabled: !!latestPeriodId,
@@ -20,5 +20,7 @@ export function useTrendingNews() {
     isLoading: !latestPeriodId || isLoading,
     isError,
     error,
+    refetch,
+    isRefetching,
   };
 }

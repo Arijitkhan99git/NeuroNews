@@ -1,61 +1,28 @@
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
+import { getDetail, getSector, parseAmount } from "@/hooks/useInvestmentHooks";
+import { Ionicons } from "@expo/vector-icons";
 import React, { useMemo } from "react";
+import { View } from "react-native";
 import { FundingComponentProps } from "..";
 import FundingCard from "./FundingCard";
 
-const parseAmount = (amount: string): number => {
-  const value = parseFloat(amount.replace(/[^0-9.]/g, ""));
-
-  if (Number.isNaN(value)) {
-    return 0;
-  }
-
-  if (amount.includes("B")) {
-    return value * 1000;
-  }
-
-  if (amount.includes("K")) {
-    return value / 1000;
-  }
-
-  return value;
-};
-
-const getSector = (content: string): string => {
-  const text = content.toLowerCase();
-
-  if (text.includes("robotic")) return "Robotics";
-  if (text.includes("cybersecurity")) return "Cybersecurity";
-  if (text.includes("energy")) return "Energy";
-  if (text.includes("infrastructure")) return "Infrastructure";
-  if (text.includes("health")) return "Healthcare";
-  if (text.includes("fintech")) return "Fintech";
-
-  return "Technology";
-};
-
-const getDetail = (
-  investors: string[],
-  round: string,
-  roundCategory: string,
-): string => {
-  const investor = investors?.find((item) => item && item.trim());
-
-  if (investor) {
-    return investor;
-  }
-
-  if (round && round !== "Unknown") {
-    return round;
-  }
-
-  if (roundCategory && roundCategory !== "Unknown") {
-    return roundCategory;
-  }
-
-  return "Funding";
-};
+const TopFundingSkeleton = () => (
+  <VStack className="gap-1">
+    <Text className="mb-3 mt-3 text-lg font-semibold text-foreground">
+      🚀 Top Funding
+    </Text>
+    {[1, 2].map((i) => (
+      <View key={i} className="mb-3 rounded-xl bg-card border border-border p-4 gap-2">
+        <View className="flex-row items-center justify-between">
+          <View className="h-4 w-32 rounded bg-surface-border" />
+          <View className="h-5 w-16 rounded bg-surface-border" />
+        </View>
+        <View className="h-3 w-48 rounded bg-surface-border mt-1" />
+      </View>
+    ))}
+  </VStack>
+);
 
 const TopFunding = ({
   investmentData,
@@ -81,21 +48,27 @@ const TopFunding = ({
   }, [investmentData, languageCode]);
 
   if (isLoading) {
-    return <Text className="text-muted-foreground">Loading funding...</Text>;
+    return <TopFundingSkeleton />;
   }
 
   if (isError) {
     return (
-      <Text className="text-red-400">
-        {error instanceof Error ? error.message : "Failed to load funding data"}
-      </Text>
+      <VStack className="gap-1">
+        <Text className="mb-3 mt-3 text-lg font-semibold text-foreground">
+          🚀 Top Funding
+        </Text>
+        <View className="rounded-xl bg-card border border-red-500/20 p-4 flex-row items-center gap-2">
+          <Ionicons name="alert-circle-outline" size={20} color="#f87171" />
+          <Text className="text-destructive text-sm font-medium flex-1">
+            {error instanceof Error ? error.message : "Failed to load funding data"}
+          </Text>
+        </View>
+      </VStack>
     );
   }
 
   if (!topFunding.length) {
-    return (
-      <Text className="text-muted-foreground">No funding data available.</Text>
-    );
+    return null;
   }
 
   return (

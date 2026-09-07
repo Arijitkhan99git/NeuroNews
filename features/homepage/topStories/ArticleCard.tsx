@@ -6,9 +6,15 @@ import { Dimensions, Pressable, Text, View } from "react-native";
 
 const CARD_WIDTH = Dimensions.get("window").width * 0.75;
 
-export function ArticleCard({ item }: { item: NewsItem }) {
+interface ArticleCardProps {
+  item: NewsItem;
+  onPress: () => void;
+}
+
+export function ArticleCard({ item, onPress }: ArticleCardProps) {
   return (
     <Pressable
+      onPress={onPress}
       style={{ width: CARD_WIDTH }}
       className="mr-5 rounded-2xl bg-card border border-border overflow-hidden p-4"
     >
@@ -17,7 +23,7 @@ export function ArticleCard({ item }: { item: NewsItem }) {
 
         <Text
           numberOfLines={2}
-          className="text-gray-300 text-lg font-medium mb-2"
+          className="text-primaryText text-lg font-medium mb-2"
         >
           {item.content}
         </Text>

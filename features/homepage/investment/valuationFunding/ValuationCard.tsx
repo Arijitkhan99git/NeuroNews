@@ -16,7 +16,7 @@ const ValuationCard = ({ company, valuation, detail }: ValuationCardProps) => {
       <HStack className="items-center justify-between">
         <VStack className="flex-1">
           <Text
-            className="text-base font-semibold text-gray-200"
+            className="text-base font-semibold text-primaryText"
             numberOfLines={1}
           >
             {company}

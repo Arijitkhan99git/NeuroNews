@@ -1,52 +1,36 @@
 import { VStack } from "@/components/ui/vstack";
+import { useAiTipsFilterStore } from "@/features/filterModal/filterStore/useAiTipsFilterStore";
 import clsx from "clsx";
 import { BlurView } from "expo-blur";
 import { styled } from "nativewind";
 import { useEffect, useState } from "react";
 import { Modal, Pressable, ScrollView, Text, View } from "react-native";
 import { SafeAreaView as RNSafeAreaView } from "react-native-safe-area-context";
-import { useTechNewsFilterStore } from "./filterStore/useTechNewsFilterStore";
 
 const SafeAreaView = styled(RNSafeAreaView);
 
-interface FilterNewsModalProps {
+interface TipsFilterModalProps {
   visible: boolean;
   onClose: () => void;
 }
 
-const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
-  const techNews = useTechNewsFilterStore((s) => s.techNews);
+const TipsFilterModal = ({ visible, onClose }: TipsFilterModalProps) => {
+  const tips = useAiTipsFilterStore((s) => s.tips);
 
-  const storedSelectedCategories = useTechNewsFilterStore(
-    (s) => s.selectedCategories,
-  );
-  const setSelectedCategories = useTechNewsFilterStore(
-    (s) => s.setSelectedCategories,
-  );
+  const storedSelectedCategories = useAiTipsFilterStore((s) => s.selectedCategories);
+  const setSelectedCategories = useAiTipsFilterStore((s) => s.setSelectedCategories);
 
-  const storedSelectedDifficulties = useTechNewsFilterStore(
-    (s) => s.selectedDifficulties,
-  );
-  const clearCategories = useTechNewsFilterStore((s) => s.clearCategories);
+  const storedSelectedDifficulties = useAiTipsFilterStore((s) => s.selectedDifficulties);
+  const setSelectedDifficulties = useAiTipsFilterStore((s) => s.setSelectedDifficulties);
 
-  const setSelectedDifficulties = useTechNewsFilterStore(
-    (s) => s.setSelectedDifficulties,
-  );
-
-  const clearDifficulties = useTechNewsFilterStore((s) => s.clearDifficulties);
+  const clearCategories = useAiTipsFilterStore((s) => s.clearCategories);
+  const clearDifficulties = useAiTipsFilterStore((s) => s.clearDifficulties);
 
   // Local draft — not committed to the store until "Apply"
-  const [draftCategories, setDraftCategories] = useState<string[]>(
-    storedSelectedCategories,
-  );
+  const [draftCategories, setDraftCategories] = useState<string[]>(storedSelectedCategories);
+  const [draftDifficulties, setDraftDifficulties] = useState<string[]>(storedSelectedDifficulties);
 
-  // Local difficulties draft — not committed to the store until "Apply"
-  const [draftDifficulties, setDraftDifficulties] = useState<string[]>(
-    storedSelectedDifficulties,
-  );
-
-  // Re-sync the draft with the store's actual applied value every time the modal opens,
-  // so re-opening reflects what's currently filtered, discarding any prior unapplied edits.
+  // Re-sync the draft with the store every time the modal opens
   useEffect(() => {
     if (visible) {
       setDraftCategories(storedSelectedCategories);
@@ -56,17 +40,13 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
 
   const toggleDraftCategory = (category: string) => {
     setDraftCategories((prev) =>
-      prev.includes(category)
-        ? prev.filter((c) => c !== category)
-        : [...prev, category],
+      prev.includes(category) ? prev.filter((c) => c !== category) : [...prev, category],
     );
   };
 
-  const toggleDraftDifficulties = (difficulty: string) => {
+  const toggleDraftDifficulty = (difficulty: string) => {
     setDraftDifficulties((prev) =>
-      prev.includes(difficulty)
-        ? prev.filter((c) => c !== difficulty)
-        : [...prev, difficulty],
+      prev.includes(difficulty) ? prev.filter((d) => d !== difficulty) : [...prev, difficulty],
     );
   };
 
@@ -77,6 +57,8 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
   const handleClearAll = () => {
     clearCategories();
     clearDifficulties();
+    setDraftCategories([]);
+    setDraftDifficulties([]);
   };
 
   const handleApply = () => {
@@ -85,30 +67,21 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
     onClose();
   };
 
-  const handleClose = () => {
-    onClose();
-  };
-
-  const categoryList = [
-    ...new Set((techNews || []).map((item) => item.category.trim())),
-  ];
-
-  const difficultyList = [
-    ...new Set((techNews || []).map((item) => item.impact.trim())),
-  ].map((item) => item.charAt(0).toUpperCase() + item.slice(1));
+  const categoryList = [...new Set((tips || []).map((item) => item.category.trim()))];
+  const difficultyList = [...new Set((tips || []).map((item) => item.difficulty.trim()))];
 
   return (
     <Modal
       visible={visible}
       transparent
       animationType="slide"
-      onRequestClose={handleClose}
+      onRequestClose={onClose}
     >
       <SafeAreaView className="flex-1">
         <BlurView intensity={50} tint="dark" style={{ flex: 1 }}>
           <Pressable
             className="modal-overlay"
-            onPress={handleClose}
+            onPress={onClose}
             style={{ flex: 1, justifyContent: "center" }}
           >
             <Pressable
@@ -116,33 +89,27 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
               onPress={(e) => e.stopPropagation()}
             >
               <View className="modal-header">
-                <Text className="modal-title">Filter News</Text>
-                <Pressable className="modal-close" onPress={handleClose}>
+                <Text className="modal-title">Filter Tips</Text>
+                <Pressable className="modal-close" onPress={onClose}>
                   <Text className="modal-close-text">x</Text>
                 </Pressable>
               </View>
 
-              {/* Filter Options */}
               <ScrollView
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingBottom: 20 }}
               >
+                {/* Category */}
                 <VStack className="modal-body">
                   <VStack className="gap-3">
-                    <Text className="text-lg text-secondary-foreground">
-                      Select Category
-                    </Text>
-
+                    <Text className="text-lg text-secondary-foreground">Select Category</Text>
                     <View className="category-scroll">
                       {categoryList.map((cat, index) => {
                         const isActive = draftCategories.includes(cat);
                         return (
                           <Pressable
                             key={index}
-                            className={clsx(
-                              "category-chip",
-                              isActive && "category-chip-active",
-                            )}
+                            className={clsx("category-chip", isActive && "category-chip-active")}
                             onPress={() => toggleDraftCategory(cat)}
                           >
                             <Text
@@ -161,23 +128,18 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
                   </VStack>
                 </VStack>
 
+                {/* Difficulty */}
                 <VStack className="modal-body">
                   <VStack className="gap-3">
-                    <Text className="text-lg text-secondary-foreground">
-                      Select Difficulty Level
-                    </Text>
-
+                    <Text className="text-lg text-secondary-foreground">Select Difficulty</Text>
                     <View className="category-scroll">
                       {difficultyList.map((diff, index) => {
                         const isActive = draftDifficulties.includes(diff);
                         return (
                           <Pressable
                             key={index}
-                            className={clsx(
-                              "category-chip",
-                              isActive && "category-chip-active",
-                            )}
-                            onPress={() => toggleDraftDifficulties(diff)}
+                            className={clsx("category-chip", isActive && "category-chip-active")}
+                            onPress={() => toggleDraftDifficulty(diff)}
                           >
                             <Text
                               className={clsx(
@@ -196,19 +158,14 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
                 </VStack>
               </ScrollView>
 
-              {/* Footer actions */}
+              {/* Footer */}
               <View className="modal-footer">
-                <Pressable
-                  className="filter-clear-btn"
-                  onPress={handleClearAll}
-                >
+                <Pressable className="filter-clear-btn" onPress={handleClearAll}>
                   <Text className="filter-clear-text">Clear all</Text>
                 </Pressable>
-
                 <Pressable className="filter-apply-btn" onPress={handleApply}>
                   <Text className="filter-apply-text">
-                    Apply
-                    {totalSelectedCount > 0 ? ` (${totalSelectedCount})` : ""}
+                    Apply{totalSelectedCount > 0 ? ` (${totalSelectedCount})` : ""}
                   </Text>
                 </Pressable>
               </View>
@@ -220,4 +177,4 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
   );
 };
 
-export default NewsFilterModal;
+export default TipsFilterModal;
