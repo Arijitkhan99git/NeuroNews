@@ -55,7 +55,6 @@ export default function RootLayout() {
 
             }}>
             <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="tips" />
             <Stack.Screen name="tips/[id]" />
             <Stack.Screen name="news/[id]" />
           </Stack>

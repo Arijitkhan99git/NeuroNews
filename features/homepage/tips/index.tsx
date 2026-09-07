@@ -38,6 +38,7 @@ const AiTipsHomePage = () => {
   // Dashboard should only show a few
   const featuredTips = tips.slice(0, 3);
 
+
   return (
     <VStack className="gap-4">
       {/* Header */}
@@ -52,14 +53,15 @@ const AiTipsHomePage = () => {
       {/* Tips */}
       {featuredTips.map((item) => (
         <TipCard
-          key={item.id}
+          key={String(item.id)}
           content={item.content}
           tip={item.tip}
           category={item.category}
           difficulty={item.difficulty}
           platform={item.platform}
-          sourceUrl={item.sourceUrl}
-          itemId={item.id}
+          onPress={() =>
+            router.push({ pathname: "/tips/[id]", params: { id: String(item.id) } })
+          }
         />
       ))}
 

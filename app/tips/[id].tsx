@@ -1,5 +1,7 @@
 import { AiTipItem } from "@/api/model/tip-model";
 import { useAiTipsFilterStore } from "@/features/filterModal/filterStore/useAiTipsFilterStore";
+import { useAITips } from "@/hooks/useAITips";
+import { useLanguageStore } from "@/store/useLanguageStore";
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useColorScheme } from "nativewind";
@@ -132,12 +134,20 @@ const TipReelCard = ({ item, isLast }: { item: AiTipItem; isLast: boolean }) => 
 /* ─── Screen ─────────────────────────────────────────────── */
 const TipDetails = () => {
     const { id } = useLocalSearchParams<{ id: string }>();
-    const tips = useAiTipsFilterStore((s) => s.tips);
+    const storeTips = useAiTipsFilterStore((s) => s.tips);
     const listRef = useRef<FlatList>(null);
     const insets = useSafeAreaInsets();
     const { colorScheme } = useColorScheme();
     const isDark = colorScheme === "dark";
     const iconMuted = isDark ? "#94a3b8" : "#64748b";
+
+    const { aiTipsData, isLoading } = useAITips();
+    const languageCode = useLanguageStore((s) => s.languageCode);
+
+    const tips = useMemo(() => {
+        if (storeTips && storeTips.length > 0) return storeTips;
+        return aiTipsData?.[languageCode] ?? [];
+    }, [storeTips, aiTipsData, languageCode]);
 
     const initialIndex = useMemo(
         () => Math.max(tips?.findIndex((s) => String(s.id) === id) ?? -1, 0),
