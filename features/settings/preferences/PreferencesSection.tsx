@@ -6,6 +6,7 @@ import { LanguagePickerModal } from "@/features/modals/LanguagePickerModal";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { Bell, Globe } from "lucide-react-native";
 import React, { useState } from "react";
+import { IconWrap } from "../components/IconWrap";
 import { SettingsRow } from "../settingsRow/SettingsRow";
 
 const LANGUAGE_LABELS: Record<string, string> = {
@@ -30,17 +31,25 @@ export function PreferencesSection() {
     <VStack className="mt-6">
       <Text className="text-muted-foreground mb-2 px-1">Preferences</Text>
 
-      <VStack className="bg-card rounded-2xl border border-border overflow-hidden">
+      <VStack className="bg-card rounded-2xl border border-surface-border overflow-hidden">
         <SettingsRow
-          icon={Globe}
+          icon={
+            <IconWrap bg="#645cf0ff">
+              <Globe size={20} color="#FFFFFF" strokeWidth={2} />
+            </IconWrap>
+          }
           label="Language"
           value={LANGUAGE_LABELS[languageCode] ?? languageCode}
           showChevron
           onPress={() => setPickerOpen(true)}
         />
-        <Divider className="bg-border" />
+        <Divider className="bg-surface-border" />
         <SettingsRow
-          icon={Bell}
+          icon={
+            <IconWrap bg="#f4b54aff">
+              <Bell size={20} color="#FFFFFF" strokeWidth={2} />
+            </IconWrap>
+          }
           label="Notifications"
           rightElement={
             <Switch

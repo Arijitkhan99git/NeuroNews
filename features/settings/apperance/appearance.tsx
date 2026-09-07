@@ -13,23 +13,13 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { useThemeStore } from "@/store/useThemeStore";
+
 import { Palette } from "lucide-react-native";
 import React from "react";
 import { Text } from "react-native";
+import { IconWrap } from "../components/IconWrap";
 
-const IconWrap = ({ bg }: { bg: string }) => {
-  return (
-    <Box
-      style={{
-        backgroundColor: bg,
-        padding: 8,
-      }}
-      className="rounded-full mr-2"
-    >
-      <Palette size={22} color="#FFFFFF" strokeWidth={2} />
-    </Box>
-  );
-};
+
 
 const Appearance = () => {
   const mode = useThemeStore((s) => s.mode);
@@ -42,12 +32,14 @@ const Appearance = () => {
   };
 
   return (
-    <Box className="flex gap-2">
+    <Box className="flex gap-2 mt-6">
       <Text className="text-muted-foreground">Appearance</Text>
-      <Box className="bg-surface border border-surface-border w-full p-4 flex flex-row justify-between rounded-lg items-center">
+      <Box className="bg-card border border-surface-border w-full p-4 flex flex-row justify-between rounded-lg items-center">
         <Box className="flex flex-row items-center gap-2">
-          <IconWrap bg="#7C8BE0" />
-          <Text className="text-foreground text-lg font-semibold">Appearance</Text>
+          <IconWrap bg="#7C8BE0" >
+            <Palette size={20} color="#FFFFFF" strokeWidth={2} />
+          </IconWrap>
+          <Text className="text-foreground text-lg">Theme</Text>
         </Box>
 
         <Box>

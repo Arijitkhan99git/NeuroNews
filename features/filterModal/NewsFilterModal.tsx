@@ -95,7 +95,7 @@ const NewsFilterModal = ({ visible, onClose }: FilterNewsModalProps) => {
 
   const difficultyList = [
     ...new Set((techNews || []).map((item) => item.impact.trim())),
-  ];
+  ].map((item) => item.charAt(0).toUpperCase() + item.slice(1));
 
   return (
     <Modal

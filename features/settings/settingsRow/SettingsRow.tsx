@@ -7,7 +7,7 @@ import { Pressable, Text } from "react-native";
 import { Icon } from "@/components/ui/icon";
 
 interface SettingsRowProps {
-  icon: LucideIcon;
+  icon: LucideIcon | React.ReactNode;
   label: string;
   value?: string;
   rightElement?: React.ReactNode;
@@ -23,10 +23,19 @@ export function SettingsRow({
   showChevron = false,
   onPress,
 }: SettingsRowProps) {
+  const renderIcon = () => {
+    if (!icon) return null;
+    if (React.isValidElement(icon)) {
+      return icon;
+    }
+    const IconComponent = icon as LucideIcon;
+    return <Icon as={IconComponent} size="md" className="text-primary" />;
+  };
+
   const content = (
     <HStack className="items-center justify-between px-4 py-3.5">
       <HStack className="items-center gap-3">
-        <Icon as={icon} size="md" className="text-primary" />
+        {renderIcon()}
         <Text className="text-foreground text-base">{label}</Text>
       </HStack>
 

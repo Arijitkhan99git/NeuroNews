@@ -1,10 +1,28 @@
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { getDetail, getSector, parseAmount } from "@/hooks/useInvestmentHooks";
+import { Ionicons } from "@expo/vector-icons";
 import React, { useMemo } from "react";
+import { View } from "react-native";
 import { FundingComponentProps } from "..";
 import FundingCard from "./FundingCard";
 
+const TopFundingSkeleton = () => (
+  <VStack className="gap-1">
+    <Text className="mb-3 mt-3 text-lg font-semibold text-foreground">
+      🚀 Top Funding
+    </Text>
+    {[1, 2].map((i) => (
+      <View key={i} className="mb-3 rounded-xl bg-card border border-border p-4 gap-2">
+        <View className="flex-row items-center justify-between">
+          <View className="h-4 w-32 rounded bg-surface-border" />
+          <View className="h-5 w-16 rounded bg-surface-border" />
+        </View>
+        <View className="h-3 w-48 rounded bg-surface-border mt-1" />
+      </View>
+    ))}
+  </VStack>
+);
 
 const TopFunding = ({
   investmentData,
@@ -30,21 +48,27 @@ const TopFunding = ({
   }, [investmentData, languageCode]);
 
   if (isLoading) {
-    return <Text className="text-muted-foreground">Loading funding...</Text>;
+    return <TopFundingSkeleton />;
   }
 
   if (isError) {
     return (
-      <Text className="text-red-400">
-        {error instanceof Error ? error.message : "Failed to load funding data"}
-      </Text>
+      <VStack className="gap-1">
+        <Text className="mb-3 mt-3 text-lg font-semibold text-foreground">
+          🚀 Top Funding
+        </Text>
+        <View className="rounded-xl bg-card border border-red-500/20 p-4 flex-row items-center gap-2">
+          <Ionicons name="alert-circle-outline" size={20} color="#f87171" />
+          <Text className="text-destructive text-sm font-medium flex-1">
+            {error instanceof Error ? error.message : "Failed to load funding data"}
+          </Text>
+        </View>
+      </VStack>
     );
   }
 
   if (!topFunding.length) {
-    return (
-      <Text className="text-muted-foreground">No funding data available.</Text>
-    );
+    return null;
   }
 
   return (
