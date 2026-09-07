@@ -10,9 +10,9 @@ import NoResultsFound from "@/features/noResultFound/NoResultFound";
 import { useTechNews } from "@/hooks/useTechNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { Ionicons } from "@expo/vector-icons";
-import { useColorScheme } from "nativewind";
 import { router } from "expo-router";
 import { AlertTriangle, SlidersHorizontal, X } from "lucide-react-native";
+import { useColorScheme } from "nativewind";
 import React, { useEffect, useMemo, useState } from "react";
 import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -33,65 +33,65 @@ const NewsHeader = ({
   const iconMuted = isDark ? "#94a3b8" : "#64748b";
 
   return (
-  <VStack>
-    <HStack className="justify-between items-center gap-20">
-      <VStack className="flex-1">
-        <SectionHeading style={{ fontSize: 28, lineHeight: 32 }}>
-          AI News
-        </SectionHeading>
+    <VStack>
+      <HStack className="justify-between items-center gap-20">
+        <VStack className="flex-1">
+          <SectionHeading style={{ fontSize: 28, lineHeight: 32 }}>
+            AI News
+          </SectionHeading>
 
-        <Text className="text-sm text-muted-foreground mt-1">
-          Stay informed about the latest developments in AI.
-        </Text>
-      </VStack>
-    </HStack>
+          <Text className="text-sm text-muted-foreground mt-1">
+            Stay informed about the latest developments in AI.
+          </Text>
+        </VStack>
+      </HStack>
 
-    {/* Search + Filter row */}
-    <View className="flex-row gap-2.5 items-center mt-6 mb-6">
-      <View className="flex-1 flex-row items-center bg-surface border border-surface-border rounded-2xl px-3 py-1 gap-2">
-        <Ionicons name="search-outline" size={16} color={iconMuted} />
-        <TextInput
-          value={query}
-          onChangeText={onChangeQuery}
-          placeholder="Search news..."
-          placeholderTextColor={iconMuted}
-          className="flex-1 text-[14px] text-foreground"
-        />
-        {query.length > 0 && (
-          <Pressable onPress={() => onChangeQuery("")} hitSlop={8}>
-            <X size={15} color={iconMuted} />
-          </Pressable>
-        )}
-      </View>
-
-      <Pressable
-        onPress={() => setModalVisible(true)}
-        className={`w-11 h-11 rounded-2xl border items-center justify-center flex-row gap-1 ${activeFilterCount > 0
-          ? "bg-primary-deep border-primary-deep"
-          : "bg-surface border-surface-border"
-          }`}
-      >
-        <SlidersHorizontal size={18} color={activeFilterCount > 0 ? "#fff" : iconMuted} />
-        {activeFilterCount > 0 && (
-          <Text className="text-xs text-white font-bold">{activeFilterCount}</Text>
-        )}
-      </Pressable>
-    </View>
-
-    <HStack className="flex-row gap-3 items-center mb-5">
-      <View className="bg-muted border border-border rounded-2xl px-4 py-2" style={styles.capsuleShadow}>
-        <Text className="text-sm font-bold text-foreground">Tech News</Text>
-      </View>
-      <View className="bg-card border border-muted rounded-2xl px-4 py-2" >
-        <Text className="text-sm font-bold text-foreground">Market Moves</Text>
-      </View>
-      <Pressable onPress={() => router.push("/tips")}>
-        <View className="bg-card border border-muted rounded-2xl px-4 py-2">
-          <Text className="text-sm font-bold text-foreground">Tips</Text>
+      {/* Search + Filter row */}
+      <View className="flex-row gap-2.5 items-center mt-6 mb-6">
+        <View className="flex-1 flex-row items-center bg-card border border-surface-border rounded-2xl px-3 py-1 gap-2">
+          <Ionicons name="search-outline" size={16} color={iconMuted} />
+          <TextInput
+            value={query}
+            onChangeText={onChangeQuery}
+            placeholder="Search news..."
+            placeholderTextColor={iconMuted}
+            className="flex-1 text-[14px] text-foreground"
+          />
+          {query.length > 0 && (
+            <Pressable onPress={() => onChangeQuery("")} hitSlop={8}>
+              <X size={15} color={iconMuted} />
+            </Pressable>
+          )}
         </View>
-      </Pressable>
-    </HStack>
-  </VStack>
+
+        <Pressable
+          onPress={() => setModalVisible(true)}
+          className={`w-11 h-11 rounded-2xl border items-center justify-center flex-row gap-1 ${activeFilterCount > 0
+            ? "bg-primary-deep border-primary-deep"
+            : "bg-card border-surface-border"
+            }`}
+        >
+          <SlidersHorizontal size={18} color={activeFilterCount > 0 ? "#fff" : iconMuted} />
+          {activeFilterCount > 0 && (
+            <Text className="text-xs text-white font-bold">{activeFilterCount}</Text>
+          )}
+        </Pressable>
+      </View>
+
+      <HStack className="flex-row gap-3 items-center mb-5">
+        <View className="bg-muted border border-border rounded-2xl px-4 py-2" style={styles.capsuleShadow}>
+          <Text className="text-sm font-bold text-foreground">Tech News</Text>
+        </View>
+        <View className="bg-card border border-muted rounded-2xl px-4 py-2" >
+          <Text className="text-sm font-bold text-foreground">Market Moves</Text>
+        </View>
+        <Pressable onPress={() => router.push("/tips")}>
+          <View className="bg-card border border-muted rounded-2xl px-4 py-2">
+            <Text className="text-sm font-bold text-foreground">Tips</Text>
+          </View>
+        </Pressable>
+      </HStack>
+    </VStack>
   );
 };
 

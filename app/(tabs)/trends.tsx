@@ -1,7 +1,5 @@
 import { Box } from "@/components/ui/box";
 import { HStack } from "@/components/ui/hstack";
-import { SearchIcon } from "@/components/ui/icon";
-import { Input, InputField, InputIcon, InputSlot } from "@/components/ui/input";
 import { VStack } from "@/components/ui/vstack";
 import { SectionHeading } from "@/components/utils/SectionHeading";
 import { useTrendingFilterStore } from "@/features/filterModal/filterStore/useTrendingFilterStore";
@@ -11,11 +9,11 @@ import TrendingCardList from "@/features/trending/TrendingCardList";
 import TrendingCardSkeleton from "@/features/trending/TrendingCardSkeleton";
 import { useTrendingNews } from "@/hooks/useTrendingNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
-import { useColorScheme } from "nativewind";
-import { AlertTriangle, Menu, X, SlidersHorizontal } from "lucide-react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { AlertTriangle, SlidersHorizontal, X } from "lucide-react-native";
+import { useColorScheme } from "nativewind";
 import React, { useEffect, useMemo, useState } from "react";
-import { FlatList, Pressable, Text, View, TextInput } from "react-native";
+import { FlatList, Pressable, Text, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const TrendsHeader = ({
@@ -34,52 +32,52 @@ const TrendsHeader = ({
   const iconMuted = isDark ? "#94a3b8" : "#64748b";
 
   return (
-  <VStack>
-    <HStack className="justify-between items-center gap-20">
-      <VStack className="flex-1">
-        <SectionHeading style={{ fontSize: 28, lineHeight: 32 }}>
-          Trending
-        </SectionHeading>
+    <VStack>
+      <HStack className="justify-between items-center gap-20">
+        <VStack className="flex-1">
+          <SectionHeading style={{ fontSize: 28, lineHeight: 32 }}>
+            Trending
+          </SectionHeading>
 
-        <Text className="text-sm text-muted-foreground mt-1">
-          What is gaining attention today.
-        </Text>
-      </VStack>
+          <Text className="text-sm text-muted-foreground mt-1">
+            What is gaining attention today.
+          </Text>
+        </VStack>
 
-    </HStack>
+      </HStack>
 
-    {/* Search + Filter row */}
-    <View className="flex-row gap-2.5 items-center mt-6 mb-6">
-      <View className="flex-1 flex-row items-center bg-surface border border-surface-border rounded-2xl px-3 py-1 gap-2">
-        <Ionicons name="search-outline" size={16} color={iconMuted} />
-        <TextInput
-          value={query}
-          onChangeText={onChangeQuery}
-          placeholder="Search trends..."
-          placeholderTextColor={iconMuted}
-          className="flex-1 text-[14px] text-foreground"
-        />
-        {query.length > 0 && (
-          <Pressable onPress={() => onChangeQuery("")} hitSlop={8}>
-            <X size={15} color={iconMuted} />
-          </Pressable>
-        )}
-      </View>
+      {/* Search + Filter row */}
+      <View className="flex-row gap-2.5 items-center mt-6 mb-6">
+        <View className="flex-1 flex-row items-center bg-card border border-surface-border rounded-2xl px-3 py-1 gap-2">
+          <Ionicons name="search-outline" size={16} color={iconMuted} />
+          <TextInput
+            value={query}
+            onChangeText={onChangeQuery}
+            placeholder="Search trends..."
+            placeholderTextColor={iconMuted}
+            className="flex-1 text-[14px] text-foreground"
+          />
+          {query.length > 0 && (
+            <Pressable onPress={() => onChangeQuery("")} hitSlop={8}>
+              <X size={15} color={iconMuted} />
+            </Pressable>
+          )}
+        </View>
 
-      <Pressable
-        onPress={() => setModalVisible(true)}
-        className={`w-11 h-11 rounded-2xl border items-center justify-center flex-row gap-1 ${activeFilterCount > 0
+        <Pressable
+          onPress={() => setModalVisible(true)}
+          className={`w-11 h-11 rounded-2xl border items-center justify-center flex-row gap-1 ${activeFilterCount > 0
             ? "bg-primary-deep border-primary-deep"
-            : "bg-surface border-surface-border"
-          }`}
-      >
-        <SlidersHorizontal size={18} color={activeFilterCount > 0 ? "#fff" : iconMuted} />
-        {activeFilterCount > 0 && (
-          <Text className="text-xs text-white font-bold">{activeFilterCount}</Text>
-        )}
-      </Pressable>
-    </View>
-  </VStack>
+            : "bg-card border-surface-border"
+            }`}
+        >
+          <SlidersHorizontal size={18} color={activeFilterCount > 0 ? "#fff" : iconMuted} />
+          {activeFilterCount > 0 && (
+            <Text className="text-xs text-white font-bold">{activeFilterCount}</Text>
+          )}
+        </Pressable>
+      </View>
+    </VStack>
   );
 };
 

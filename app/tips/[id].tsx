@@ -95,7 +95,7 @@ const TipReelCard = ({ item, isLast }: { item: AiTipItem; isLast: boolean }) => 
                                 {item.author?.name?.charAt(0) ?? "?"}
                             </Text>
                         </View>
-                        <View>
+                        <View className="flex flex-row items-center">
                             <Text className="text-[13px] font-semibold text-foreground">
                                 {item.author?.name ?? "Unknown"}
                             </Text>

@@ -163,32 +163,32 @@ const TipsPage = () => {
                 </View>
             </View>
 
-        {/* Search + Filter row */}
-        <View className="flex-row gap-2.5 items-center mt-1 mb-4">
-            <View className="flex-1 flex-row items-center bg-surface border border-surface-border rounded-2xl px-3 py-1 gap-2">
-                <Ionicons name="search-outline" size={16} color={iconMuted} />
-                <TextInput
-                    value={searchQuery}
-                    onChangeText={setSearchQuery}
-                    placeholder="Search tips..."
-                    placeholderTextColor={iconMuted}
-                    className="flex-1 text-[14px] text-foreground"
-                />
-                {searchQuery.length > 0 && (
-                    <Pressable onPress={() => setSearchQuery("")} hitSlop={8}>
-                        <X size={15} color={iconMuted} />
-                    </Pressable>
-                )}
-            </View>
+            {/* Search + Filter row */}
+            <View className="flex-row gap-2.5 items-center mt-1 mb-4">
+                <View className="flex-1 flex-row items-center bg-card border border-surface-border rounded-2xl px-3 py-1 gap-2">
+                    <Ionicons name="search-outline" size={16} color={iconMuted} />
+                    <TextInput
+                        value={searchQuery}
+                        onChangeText={setSearchQuery}
+                        placeholder="Search tips..."
+                        placeholderTextColor={iconMuted}
+                        className="flex-1 text-[14px] text-foreground"
+                    />
+                    {searchQuery.length > 0 && (
+                        <Pressable onPress={() => setSearchQuery("")} hitSlop={8}>
+                            <X size={15} color={iconMuted} />
+                        </Pressable>
+                    )}
+                </View>
 
                 <Pressable
                     onPress={() => setIsModalVisible(true)}
                     className={`w-11 h-11 rounded-2xl border items-center justify-center flex-row gap-1 ${activeFilterCount > 0
                         ? "bg-primary-deep border-primary-deep"
-                        : "bg-surface border-surface-border"
+                        : "bg-card border-surface-border"
                         }`}
                 >
-                <SlidersHorizontal size={18} color={activeFilterCount > 0 ? "#fff" : iconMuted} />
+                    <SlidersHorizontal size={18} color={activeFilterCount > 0 ? "#fff" : iconMuted} />
                     {activeFilterCount > 0 && (
                         <Text className="text-xs text-white font-bold">{activeFilterCount}</Text>
                     )}
