@@ -14,7 +14,14 @@ import { router } from "expo-router";
 import { AlertTriangle, SlidersHorizontal, X } from "lucide-react-native";
 import { useColorScheme } from "nativewind";
 import React, { useEffect, useMemo, useState } from "react";
-import { FlatList, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const NewsHeader = ({
@@ -66,25 +73,36 @@ const NewsHeader = ({
 
         <Pressable
           onPress={() => setModalVisible(true)}
-          className={`w-11 h-11 rounded-2xl border items-center justify-center flex-row gap-1 ${activeFilterCount > 0
-            ? "bg-primary-deep border-primary-deep"
-            : "bg-card border-surface-border"
-            }`}
+          className={`w-11 h-11 rounded-2xl border items-center justify-center flex-row gap-1 ${
+            activeFilterCount > 0
+              ? "bg-primary-deep border-primary-deep"
+              : "bg-card border-surface-border"
+          }`}
         >
-          <SlidersHorizontal size={18} color={activeFilterCount > 0 ? "#fff" : iconMuted} />
+          <SlidersHorizontal
+            size={18}
+            color={activeFilterCount > 0 ? "#fff" : iconMuted}
+          />
           {activeFilterCount > 0 && (
-            <Text className="text-xs text-white font-bold">{activeFilterCount}</Text>
+            <Text className="text-xs text-white font-bold">
+              {activeFilterCount}
+            </Text>
           )}
         </Pressable>
       </View>
 
       <HStack className="flex-row gap-3 items-center mb-5">
-        <View className="bg-muted border border-border rounded-2xl px-4 py-2" style={styles.capsuleShadow}>
+        <View
+          className="bg-muted border border-border rounded-2xl px-4 py-2"
+          style={styles.capsuleShadow}
+        >
           <Text className="text-sm font-bold text-foreground">Tech News</Text>
         </View>
         <Pressable onPress={() => router.push("/investment")}>
-          <View className="bg-card border border-muted rounded-2xl px-4 py-2" >
-            <Text className="text-sm font-bold text-foreground">Investment News</Text>
+          <View className="bg-card border border-muted rounded-2xl px-4 py-2">
+            <Text className="text-sm font-bold text-foreground">
+              Investment News
+            </Text>
           </View>
         </Pressable>
 
@@ -125,8 +143,8 @@ const News = () => {
     }
   }, [newsData, setTechNews]);
 
-  const activeFilterCount = selectedCategories.length + selectedDifficulties.length;
-
+  const activeFilterCount =
+    selectedCategories.length + selectedDifficulties.length;
 
   const filterNewsData = newsData.filter((item) => {
     const matchesSearch =

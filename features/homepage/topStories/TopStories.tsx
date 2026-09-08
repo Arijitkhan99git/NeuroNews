@@ -1,6 +1,7 @@
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { SectionHeading } from "@/components/utils/SectionHeading";
+import useActiveIconColor from "@/hooks/useActiveIconColor";
 import { useTechNews } from "@/hooks/useTechNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { router } from "expo-router";
@@ -13,6 +14,8 @@ import ArticleDetailModal from "./ArticleDetailModal";
 import { ListFooterComponent } from "./FooterComponent";
 
 const TopStories = () => {
+  const activeIconColor = useActiveIconColor();
+
   const { techNewsData, isLoading, isError, error } = useTechNews();
   const languageCode = useLanguageStore((s) => s.languageCode);
   const [isAtEnd, setIsAtEnd] = useState(false);
@@ -43,8 +46,8 @@ const TopStories = () => {
             className="flex flex-row gap-1"
             onPress={() => router.push("/news")}
           >
-            <Text className="text-muted text-sm">View All</Text>
-            <ArrowRight color="#b9a0f8cc" size={20} />
+            <Text className="text-secondary text-sm">View All</Text>
+            <ArrowRight color={activeIconColor} size={18} />
           </Pressable>
         )}
       </HStack>
@@ -81,10 +84,7 @@ const TopStories = () => {
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item, index }) => (
-            <ArticleCard
-              item={item}
-              onPress={() => setModalIndex(index)}
-            />
+            <ArticleCard item={item} onPress={() => setModalIndex(index)} />
           )}
           ListFooterComponent={<ListFooterComponent />}
           snapToInterval={CARD_WIDTH + GAP}

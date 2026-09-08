@@ -1,6 +1,7 @@
 import { HStack } from "@/components/ui/hstack";
 import { VStack } from "@/components/ui/vstack";
 import { SectionHeading } from "@/components/utils/SectionHeading";
+import useActiveIconColor from "@/hooks/useActiveIconColor";
 import { useTrendingNews } from "@/hooks/useTrendingNews";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { router } from "expo-router";
@@ -15,7 +16,7 @@ const SKELETON_COUNT = 3;
 const TrendingHomePage = () => {
   const colorScheme = useColorScheme();
   const iconMuted = colorScheme === "dark" ? "#9CA3AF" : "#64748b";
-  const iconActive = colorScheme === "dark" ? "#b9a0f8cc" : "#6D28D9";
+  const activeIconColor = useActiveIconColor();
 
   const { trendingData, isLoading, isError, error } = useTrendingNews();
   const languageCode = useLanguageStore((s) => s.languageCode);
@@ -90,9 +91,8 @@ const TrendingHomePage = () => {
           className="flex-row items-center gap-1"
           onPress={() => router.push("/(tabs)/trends")}
         >
-          <Text className="text-sm text-secondary">View All</Text>
-
-          <ArrowRight size={18} color={iconActive} />
+          <Text className="text-secondary text-sm">View All</Text>
+          <ArrowRight color={activeIconColor} size={20} />
         </Pressable>
       </HStack>
 

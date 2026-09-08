@@ -9,7 +9,6 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { useLatestPeriodStore } from "@/store/usePeriodIdStore";
 import { useQuery } from "@tanstack/react-query";
-import clsx from "clsx";
 import { Cpu } from "lucide-react-native";
 import { useColorScheme } from "nativewind";
 import React from "react";
@@ -26,7 +25,10 @@ function StatItem({ count, label, isLoading }: StatItemProps) {
     <View className="flex-1 items-center justify-center py-4">
       {/* Count */}
       {isLoading ? (
-        <Skeleton variant="rounded" className="h-7 w-12 mb-2 bg-surface-border" />
+        <Skeleton
+          variant="rounded"
+          className="h-7 w-12 mb-2 bg-surface-border"
+        />
       ) : (
         <Text className="text-foreground text-2xl font-bold mb-1">{count}</Text>
       )}
@@ -85,9 +87,7 @@ const AiDaily = () => {
     : 0;
 
   return (
-    <View
-      className="px-4 py-6 rounded-xl bg-daily-bg"
-    >
+    <View className="px-4 py-6 rounded-xl bg-daily-bg">
       <View className="flex flex-row items-center justify-between mb-5">
         <View className="px-3 py-1 bg-badgebackground self-start rounded-md">
           <Text className="text-badgeText text-center text-sm py-0.5">

@@ -26,7 +26,7 @@
     --primary: 109 40 217;
     /* #6D28D9  deep violet — high contrast on light */
     --primary-foreground: 255 255 255;
-    --card: 255 255 255;
+    --card: 235, 234, 249;
     /* pure white cards */
     --secondary: 139 92 246;
     /* #8B5CF6  violet */
@@ -44,7 +44,7 @@
     --destructive: 220 38 38;
     --foreground: 15 23 42;
     /* Slate 900 */
-    --border: 203 213 225;
+    --border: 221 214 255;
     /* #CBD5E1 */
     --input: 203 213 225;
     --ring: 109 40 217;
@@ -78,8 +78,8 @@
     --brand-indigo: 93 61 232;
     --daily-label: 100 116 139;
     /* Slate 500 */
-    --daily-bg: 226 232 240;
-    /* Slate 200 */
+    --daily-bg: 245, 243, 255;
+    /* Violet 50 */
     --primaryText: 107 114 128;
     /*gray-500 */
     --secondaryText: 75 85 99;
@@ -202,7 +202,7 @@
     /* Light theme (class toggle) */
     --primary: 109 40 217;
     --primary-foreground: 255 255 255;
-    --card: 255 255 255;
+    --card: 235, 234, 249;
     --secondary: 139 92 246;
     --secondary-foreground: 91 33 182;
     --background: 250 250 250;
@@ -213,7 +213,7 @@
     --subtle: 100 116 139;
     --destructive: 220 38 38;
     --foreground: 15 23 42;
-    --border: 203 213 225;
+    --border: 221 214 255;
     --input: 203 213 225;
     --ring: 109 40 217;
     --accent: 34 211 238 0.1;
@@ -236,7 +236,7 @@
 
     --brand-indigo: 93 61 232;
     --daily-label: 100 116 139;
-    --daily-bg: 226 232 240;
+    --daily-bg: 245, 243, 255;
     --primaryText: 107 114 128;
     --secondaryText: 75 85 99;
   }

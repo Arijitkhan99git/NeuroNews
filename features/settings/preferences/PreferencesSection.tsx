@@ -28,8 +28,8 @@ export function PreferencesSection() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   return (
-    <VStack className="mt-6">
-      <Text className="text-muted-foreground mb-2 px-1">Preferences</Text>
+    <VStack className="gap-2">
+      <Text className="text-muted-foreground">Preferences</Text>
 
       <VStack className="bg-card rounded-2xl border border-surface-border overflow-hidden">
         <SettingsRow

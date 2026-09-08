@@ -2,6 +2,7 @@ import { NewsItem } from "@/api/model/techNews-model";
 import CustomBadge from "@/components/utils/Badge";
 import ImpactBadge from "@/components/utils/ImpactBadge";
 import { useTechNewsFilterStore } from "@/features/filterModal/filterStore/useTechNewsFilterStore";
+import useActiveIconColor from "@/hooks/useActiveIconColor";
 
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
@@ -24,6 +25,8 @@ const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 const SafeAreaView = styled(RNSafeAreaView);
 
 const NewsDetails = () => {
+  const activeIconColor = useActiveIconColor();
+
   const { id } = useLocalSearchParams<{ id: string }>();
 
   const techNews = useTechNewsFilterStore((s) => s.techNews);
@@ -76,15 +79,17 @@ const NewsDetails = () => {
 
           <View className="flex items-center flex-row gap-2">
             <Text className="text-primaryText text-sm">Source Name:</Text>
-            <Text className="text-gray-400 font-semibold ">{item.source}</Text>
+            <Text className="text-gray-400 font-medium">{item.source}</Text>
           </View>
 
           <Pressable
             onPress={() => handleArticleUrl(item)}
-            className="flex-row items-center gap-1 mt-6"
+            className="flex flex-row items-center gap-1 mt-6"
           >
-            <Text className="text-muted text-sm">Read full article</Text>
-            <ArrowRight color="#b9a0f8cc" size={14} />
+            <Text style={{ fontSize: 13 }} className="text-secondary ">
+              Read full article
+            </Text>
+            <ArrowRight color={activeIconColor} size={16} />
           </Pressable>
         </View>
       </View>

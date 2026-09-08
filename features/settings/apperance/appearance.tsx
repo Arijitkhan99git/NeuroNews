@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { useThemeStore } from "@/store/useThemeStore";
 
+import { VStack } from "@/components/ui/vstack";
 import { Palette } from "lucide-react-native";
 import React from "react";
 import { Text } from "react-native";
@@ -32,7 +33,7 @@ const Appearance = () => {
   };
 
   return (
-    <Box className="flex gap-2 mt-6">
+    <VStack className="gap-2">
       <Text className="text-muted-foreground">Appearance</Text>
       <Box className="bg-card border border-surface-border w-full p-4 flex flex-row justify-between rounded-lg items-center">
         <Box className="flex flex-row items-center gap-2">
@@ -72,7 +73,7 @@ const Appearance = () => {
           </Select>
         </Box>
       </Box>
-    </Box>
+    </VStack>
   );
 };
 

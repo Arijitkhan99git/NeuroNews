@@ -19,12 +19,10 @@ const TipCard = ({
   category,
   difficulty,
   platform,
-  onPress
+  onPress,
 }: TipCardProps) => {
-
   return (
     <Pressable onPress={onPress}>
-
       <Box className="rounded-2xl bg-card p-4">
         {/* Category + Difficulty */}
         <HStack className="items-center justify-between">
@@ -62,8 +60,6 @@ const TipCard = ({
         {/* Source */}
         <HStack className="mt-4 items-center justify-between">
           <Text className="text-xs text-muted-foreground">{platform}</Text>
-
-
         </HStack>
       </Box>
     </Pressable>

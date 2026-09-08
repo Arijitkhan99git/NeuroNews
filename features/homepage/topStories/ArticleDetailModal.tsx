@@ -1,9 +1,9 @@
 import { NewsItem } from "@/api/model/techNews-model";
 import CustomBadge from "@/components/utils/Badge";
 import ImpactBadge from "@/components/utils/ImpactBadge";
+import useActiveIconColor from "@/hooks/useActiveIconColor";
 import { BlurView } from "expo-blur";
 import { ArrowRight, X } from "lucide-react-native";
-import { useColorScheme } from "nativewind";
 import React, { useCallback, useEffect, useRef } from "react";
 import {
   Dimensions,
@@ -31,8 +31,7 @@ const ArticleDetailModal = ({
   initialIndex,
   onClose,
 }: ArticleDetailModalProps) => {
-  const { colorScheme } = useColorScheme();
-  const iconActive = colorScheme === "dark" ? "#b9a0f8cc" : "#6D28D9";
+  const activeIconColor = useActiveIconColor();
   const listRef = useRef<FlatList>(null);
 
   // Scroll to the tapped card whenever the modal opens or the starting index changes
@@ -127,8 +126,8 @@ const ArticleDetailModal = ({
               onPress={() => handleArticleUrl(item)}
               className="flex-row items-center gap-1 mt-2"
             >
-              <Text className="text-muted-foreground text-sm">Read full article</Text>
-              <ArrowRight color={iconActive} size={14} />
+              <Text className="text-secondary text-sm">Read full article</Text>
+              <ArrowRight color={activeIconColor} size={14} />
             </Pressable>
           </View>
 
@@ -161,7 +160,6 @@ const ArticleDetailModal = ({
           }}
           pointerEvents="none"
         />
-
 
         {/* FlatList — centred vertically; box-none lets the backdrop Pressable
             catch taps on the empty space above/below the card */}

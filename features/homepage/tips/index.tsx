@@ -1,10 +1,13 @@
+import { HStack } from "@/components/ui/hstack";
 import { Text } from "@/components/ui/text";
 import { VStack } from "@/components/ui/vstack";
 import { SectionHeading } from "@/components/utils/SectionHeading";
+import useActiveIconColor from "@/hooks/useActiveIconColor";
 import { useAITips } from "@/hooks/useAITips";
 import { useLanguageStore } from "@/store/useLanguageStore";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { ArrowRight } from "lucide-react-native";
 import React, { useMemo } from "react";
 import { Pressable, View } from "react-native";
 import TipCard from "./TipCard";
@@ -19,7 +22,10 @@ const AiTipsSkeleton = () => (
     </VStack>
 
     {[1, 2].map((i) => (
-      <View key={i} className="rounded-2xl bg-card border border-border p-4 gap-3">
+      <View
+        key={i}
+        className="rounded-2xl bg-card border border-border p-4 gap-3"
+      >
         <View className="flex-row items-center justify-between">
           <View className="h-5 w-20 rounded-full bg-surface-border" />
           <View className="h-4 w-16 rounded bg-surface-border" />
@@ -43,6 +49,8 @@ const AiTipsSkeleton = () => (
 );
 
 const AiTipsHomePage = () => {
+  const activeIconColor = useActiveIconColor();
+
   const { aiTipsData, isLoading, isError, error } = useAITips();
   const languageCode = useLanguageStore((state) => state.languageCode);
 
@@ -101,16 +109,25 @@ const AiTipsHomePage = () => {
           difficulty={item.difficulty}
           platform={item.platform}
           onPress={() =>
-            router.push({ pathname: "/tips/[id]", params: { id: String(item.id) } })
+            router.push({
+              pathname: "/tips/[id]",
+              params: { id: String(item.id) },
+            })
           }
         />
       ))}
 
       {/* View all */}
       <Pressable onPress={() => router.push("/tips")}>
-        <Text className="mt-1 text-center text-sm font-semibold text-secondary">
-          View all tips →
-        </Text>
+        <HStack className="items-center justify-center mt-2 gap-2">
+          <Text
+            style={{ fontSize: 13 }}
+            className="font-semibold text-secondary"
+          >
+            View all tips
+          </Text>
+          <ArrowRight color={activeIconColor} size={18} />
+        </HStack>
       </Pressable>
     </VStack>
   );
