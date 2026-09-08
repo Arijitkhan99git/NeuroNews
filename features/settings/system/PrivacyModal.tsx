@@ -1,13 +1,9 @@
 import React from "react";
-import { Text, View } from "react-native";
 import { ModalProps } from "./modal-types";
+import SystemDetailModal from "./SystemDetailModal";
 
 const PrivacyModal = ({ isOpen, onClose }: ModalProps) => {
-  return (
-    <View>
-      <Text>PrivacyModal</Text>
-    </View>
-  );
+  return <SystemDetailModal type="privacy" isOpen={isOpen} onClose={onClose} />;
 };
 
 export default PrivacyModal;

@@ -1,13 +1,9 @@
 import React from "react";
-import { Text, View } from "react-native";
 import { ModalProps } from "./modal-types";
+import SystemDetailModal from "./SystemDetailModal";
 
 const AboutModal = ({ isOpen, onClose }: ModalProps) => {
-  return (
-    <View>
-      <Text>TermsModal</Text>
-    </View>
-  );
+  return <SystemDetailModal type="about" isOpen={isOpen} onClose={onClose} />;
 };
 
 export default AboutModal;
